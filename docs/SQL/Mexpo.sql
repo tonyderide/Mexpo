@@ -4,32 +4,38 @@
 
 
 #------------------------------------------------------------
-# Table: VILLE
+# Table: Localisation
 #------------------------------------------------------------
 
-CREATE TABLE VILLE(
-        ID      Int NOT NULL ,
-        ADRESSE Varchar (50) NOT NULL ,
-        VILLE   Varchar (50) NOT NULL
-	,CONSTRAINT VILLE_AK UNIQUE (VILLE)
-	,CONSTRAINT VILLE_PK PRIMARY KEY (ID)
+CREATE TABLE Localisation(
+        code_commune     Int NOT NULL ,
+        code_postal      Int NOT NULL ,
+        ville            Varchar (50) NOT NULL ,
+        pays             Varchar (50) NOT NULL ,
+        geolocalistation Varchar (50) NOT NULL
+	,CONSTRAINT Localisation_PK PRIMARY KEY (code_commune)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: MUSEE
+# Table: MUSEEXPO
 #------------------------------------------------------------
 
-CREATE TABLE MUSEE(
-        ID           Int NOT NULL ,
-        NOM          Varchar (50) NOT NULL ,
-        LOCALISATION Int NOT NULL ,
-        VILLE        Varchar (50) NOT NULL ,
-        ID_VILLE     Int NOT NULL
-	,CONSTRAINT MUSEE_AK UNIQUE (VILLE)
-	,CONSTRAINT MUSEE_PK PRIMARY KEY (ID)
+CREATE TABLE MUSEEXPO(
+        ville           Varchar (50) NOT NULL ,
+        nom             Varchar (50) NOT NULL ,
+        adresse         Varchar (50) NOT NULL ,
+        geolocalisation Varchar (50) NOT NULL ,
+        telephone       Varchar (50) NOT NULL ,
+        www             Varchar (50) NOT NULL ,
+        description     Varchar (50) NOT NULL ,
+        id              Int NOT NULL ,
+        code_commune    Int NOT NULL
+	,CONSTRAINT MUSEEXPO_Idx INDEX (id)
+	,CONSTRAINT MUSEEXPO_PK PRIMARY KEY (ville)
 
-	,CONSTRAINT MUSEE_VILLE_FK FOREIGN KEY (ID_VILLE) REFERENCES VILLE(ID)
+	,CONSTRAINT MUSEEXPO_Localisation_FK FOREIGN KEY (code_commune) REFERENCES Localisation(code_commune)
+	,CONSTRAINT MUSEEXPO_Localisation_AK UNIQUE (code_commune)
 )ENGINE=InnoDB;
 
 
@@ -38,8 +44,8 @@ CREATE TABLE MUSEE(
 #------------------------------------------------------------
 
 CREATE TABLE THEME(
-        ID    Int NOT NULL ,
-        FORME Varchar (50) NOT NULL
+        ID   Int NOT NULL ,
+        TYPE Varchar (50) NOT NULL
 	,CONSTRAINT THEME_PK PRIMARY KEY (ID)
 )ENGINE=InnoDB;
 
@@ -49,17 +55,18 @@ CREATE TABLE THEME(
 #------------------------------------------------------------
 
 CREATE TABLE OEUVRE(
-        N_INVENTAIRE    Int NOT NULL ,
-        NOM             Varchar (50) NOT NULL ,
-        DATE_CREATION   Date NOT NULL ,
-        TYPE            Varchar (50) NOT NULL ,
-        LIEUX_EXPO      Varchar (50) NOT NULL ,
-        NOM__DE_LARTIST Varchar (50) NOT NULL ,
-        ID              Int NOT NULL
-	,CONSTRAINT OEUVRE_AK UNIQUE (NOM__DE_LARTIST)
+        N_INVENTAIRE  Int NOT NULL ,
+        NOM           Varchar (50) NOT NULL ,
+        DATE_CREATION Date NOT NULL ,
+        TYPE          Varchar (50) NOT NULL ,
+        LIEUX_EXPO    Varchar (50) NOT NULL ,
+        ville         Varchar (50) NOT NULL ,
+        ID            Int NOT NULL
+	,CONSTRAINT OEUVRE_AK UNIQUE (LIEUX_EXPO)
 	,CONSTRAINT OEUVRE_PK PRIMARY KEY (N_INVENTAIRE)
 
-	,CONSTRAINT OEUVRE_MUSEE_FK FOREIGN KEY (ID) REFERENCES MUSEE(ID)
+	,CONSTRAINT OEUVRE_MUSEEXPO_FK FOREIGN KEY (ville) REFERENCES MUSEEXPO(ville)
+	,CONSTRAINT OEUVRE_THEME0_FK FOREIGN KEY (ID) REFERENCES THEME(ID)
 )ENGINE=InnoDB;
 
 
@@ -72,51 +79,41 @@ CREATE TABLE ARTISTE(
         NOM            Varchar (50) NOT NULL ,
         DATE_NAISSANCE Int NOT NULL ,
         DECES          Varchar (50) NOT NULL ,
-        ID_VILLE       Int NOT NULL
+        code_commune   Int NOT NULL ,
+        N_INVENTAIRE   Int NOT NULL
 	,CONSTRAINT ARTISTE_PK PRIMARY KEY (ID)
 
-	,CONSTRAINT ARTISTE_VILLE_FK FOREIGN KEY (ID_VILLE) REFERENCES VILLE(ID)
+	,CONSTRAINT ARTISTE_Localisation_FK FOREIGN KEY (code_commune) REFERENCES Localisation(code_commune)
+	,CONSTRAINT ARTISTE_OEUVRE0_FK FOREIGN KEY (N_INVENTAIRE) REFERENCES OEUVRE(N_INVENTAIRE)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Appartenir1
+# Table: utilisateur
 #------------------------------------------------------------
 
-CREATE TABLE Appartenir1(
-        N_INVENTAIRE Int NOT NULL ,
-        ID           Int NOT NULL
-	,CONSTRAINT Appartenir1_PK PRIMARY KEY (N_INVENTAIRE,ID)
-
-	,CONSTRAINT Appartenir1_OEUVRE_FK FOREIGN KEY (N_INVENTAIRE) REFERENCES OEUVRE(N_INVENTAIRE)
-	,CONSTRAINT Appartenir1_ARTISTE0_FK FOREIGN KEY (ID) REFERENCES ARTISTE(ID)
+CREATE TABLE utilisateur(
+        id          Int NOT NULL ,
+        nom         Varchar (50) NOT NULL ,
+        prenom      Varchar (50) NOT NULL ,
+        email       Varchar (50) NOT NULL ,
+        telephone   Int NOT NULL ,
+        adresse     Varchar (50) NOT NULL ,
+        code_postal Int NOT NULL ,
+        ville       Varchar (50) NOT NULL
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Appartenir3
+# Table: Concerner
 #------------------------------------------------------------
 
-CREATE TABLE Appartenir3(
-        ID           Int NOT NULL ,
-        N_INVENTAIRE Int NOT NULL
-	,CONSTRAINT Appartenir3_PK PRIMARY KEY (ID,N_INVENTAIRE)
+CREATE TABLE Concerner(
+        ville Varchar (50) NOT NULL ,
+        ID    Int NOT NULL
+	,CONSTRAINT Concerner_PK PRIMARY KEY (ville,ID)
 
-	,CONSTRAINT Appartenir3_THEME_FK FOREIGN KEY (ID) REFERENCES THEME(ID)
-	,CONSTRAINT Appartenir3_OEUVRE0_FK FOREIGN KEY (N_INVENTAIRE) REFERENCES OEUVRE(N_INVENTAIRE)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Appartenir
-#------------------------------------------------------------
-
-CREATE TABLE Appartenir(
-        ID       Int NOT NULL ,
-        ID_MUSEE Int NOT NULL
-	,CONSTRAINT Appartenir_PK PRIMARY KEY (ID,ID_MUSEE)
-
-	,CONSTRAINT Appartenir_THEME_FK FOREIGN KEY (ID) REFERENCES THEME(ID)
-	,CONSTRAINT Appartenir_MUSEE0_FK FOREIGN KEY (ID_MUSEE) REFERENCES MUSEE(ID)
+	,CONSTRAINT Concerner_MUSEEXPO_FK FOREIGN KEY (ville) REFERENCES MUSEEXPO(ville)
+	,CONSTRAINT Concerner_THEME0_FK FOREIGN KEY (ID) REFERENCES THEME(ID)
 )ENGINE=InnoDB;
 
