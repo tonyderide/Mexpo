@@ -10,7 +10,7 @@ Elle permet a un utilisateur de se connecter et de rechercher
 -  un artiste
 - ou par sa geolocalisation.
   
-On enregistre ca recherche afin qu'il puisse la revoir ultérieurement et le renvoie sur le site d'achat.
+On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le renvoie sur le site d'achat.
 
 
 ## MCD
