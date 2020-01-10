@@ -26,4 +26,4 @@ On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le ren
 ## __End-points__:
 
 
-## __exemple de requetes__: 
+## __Exemple de requetes__: 
