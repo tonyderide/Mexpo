@@ -56,15 +56,12 @@ CREATE TABLE OEUVRE(
 #------------------------------------------------------------
 
 CREATE TABLE ARTISTE(
-        id_artiste   Int  Auto_increment  NOT NULL ,
-        nom          Varchar (50) NOT NULL ,
-        prenom       Varchar (50) NOT NULL ,
-        naissance    Date NOT NULL ,
-        deces        Date NOT NULL ,
-        n_inventaire Varchar (50) NOT NULL
+        id_artiste Int  Auto_increment  NOT NULL ,
+        nom        Varchar (50) NOT NULL ,
+        prenom     Varchar (50) NOT NULL ,
+        naissance  Date NOT NULL ,
+        deces      Date NOT NULL
 	,CONSTRAINT ARTISTE_PK PRIMARY KEY (id_artiste)
-
-	,CONSTRAINT ARTISTE_OEUVRE_FK FOREIGN KEY (n_inventaire) REFERENCES OEUVRE(n_inventaire)
 )ENGINE=InnoDB;
 
 
@@ -82,6 +79,20 @@ CREATE TABLE user(
         mdp            Varchar (50) NOT NULL ,
         administrateur Bool NOT NULL
 	,CONSTRAINT user_PK PRIMARY KEY (mail)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Appartenir
+#------------------------------------------------------------
+
+CREATE TABLE Appartenir(
+        n_inventaire Varchar (50) NOT NULL ,
+        id_artiste   Int NOT NULL
+	,CONSTRAINT Appartenir_PK PRIMARY KEY (n_inventaire,id_artiste)
+
+	,CONSTRAINT Appartenir_OEUVRE_FK FOREIGN KEY (n_inventaire) REFERENCES OEUVRE(n_inventaire)
+	,CONSTRAINT Appartenir_ARTISTE0_FK FOREIGN KEY (id_artiste) REFERENCES ARTISTE(id_artiste)
 )ENGINE=InnoDB;
 
 
