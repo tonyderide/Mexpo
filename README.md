@@ -16,7 +16,7 @@ On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le ren
 
 ### useCase
 
-![](docs/use case/useCases.png)
+![](docs/useCase/useCases.png)
 
 ### MCD
 ![](docs/mcd/mcd.png)
