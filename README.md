@@ -12,6 +12,8 @@ Elle permet a un utilisateur de se connecter et de rechercher
   
 On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le renvoie sur le site d'achat.
 
+***
+
 ## __Fonctionnement__:
 
 ### useCase
@@ -24,13 +26,14 @@ On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le ren
 ### MLD
 ![](docs/mcd/mld.png)
 
-## __Fonctionnement__:
-
+***
 
 ## __End-points__:
 
 - http://localhost:8080/Mexpo
 
-        Page d'acceil du site
+> Page d'acceil du site
+        
+        
 
 ## __Exemple de requetes__: 
