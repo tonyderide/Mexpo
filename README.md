@@ -15,10 +15,10 @@ On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le ren
 ## __Fonctionnement__:
 
 ### MCD
-![](mcd.png)
+![](docs/mcd/mcd.png)
 
 ### MLD
-![](mld.png)
+![](docs/mcd/mld.png)
 
 ## __Fonctionnement__:
 
