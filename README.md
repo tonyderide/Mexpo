@@ -14,6 +14,10 @@ On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le ren
 
 ## __Fonctionnement__:
 
+### useCase
+
+![](docs/use case/useCases.png)
+
 ### MCD
 ![](docs/mcd/mcd.png)
 
