@@ -8,16 +8,16 @@
 #------------------------------------------------------------
 
 CREATE TABLE musee(
-        id              Int  Auto_increment  NOT NULL ,
+        id              Int NOT NULL ,
+        ville           Varchar (50) NOT NULL ,
         nom             Varchar (50) NOT NULL ,
         adresse         Varchar (50) NOT NULL ,
-        ville           Varchar (50) NOT NULL ,
         code_postal     Int NOT NULL ,
         geolocalisation Varchar (50) NOT NULL ,
         telephone       Varchar (50) NOT NULL ,
         mail            Varchar (100) NOT NULL ,
         description     Varchar (500) NOT NULL
-	,CONSTRAINT musee_PK PRIMARY KEY (id)
+	,CONSTRAINT musee_PK PRIMARY KEY (id,ville)
 )ENGINE=InnoDB;
 
 
@@ -33,6 +33,20 @@ CREATE TABLE THEME(
 
 
 #------------------------------------------------------------
+# Table: ARTISTE
+#------------------------------------------------------------
+
+CREATE TABLE ARTISTE(
+        id        Int  Auto_increment  NOT NULL ,
+        nom       Varchar (50) NOT NULL ,
+        prenom    Varchar (50) NOT NULL ,
+        naissance Date NOT NULL ,
+        deces     Date NOT NULL
+	,CONSTRAINT ARTISTE_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
 # Table: OEUVRE
 #------------------------------------------------------------
 
@@ -43,27 +57,13 @@ CREATE TABLE OEUVRE(
         type          Varchar (50) NOT NULL ,
         lieux_expo    Varchar (50) NOT NULL ,
         auteur        Varchar (50) NOT NULL ,
-        id            Int NOT NULL
+        id            Int NOT NULL ,
+        id_musee      Int ,
+        ville_musee   Varchar (50)
 	,CONSTRAINT OEUVRE_PK PRIMARY KEY (n_inventaire)
 
-	,CONSTRAINT OEUVRE_musee_FK FOREIGN KEY (id) REFERENCES musee(id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: ARTISTE
-#------------------------------------------------------------
-
-CREATE TABLE ARTISTE(
-        id           Int  Auto_increment  NOT NULL ,
-        nom          Varchar (50) NOT NULL ,
-        prenom       Varchar (50) NOT NULL ,
-        naissance    Date NOT NULL ,
-        deces        Date NOT NULL ,
-        n_inventaire Int NOT NULL
-	,CONSTRAINT ARTISTE_PK PRIMARY KEY (id)
-
-	,CONSTRAINT ARTISTE_OEUVRE_FK FOREIGN KEY (n_inventaire) REFERENCES OEUVRE(n_inventaire)
+	,CONSTRAINT OEUVRE_ARTISTE_FK FOREIGN KEY (id) REFERENCES ARTISTE(id)
+	,CONSTRAINT OEUVRE_musee0_FK FOREIGN KEY (id_musee,ville_musee) REFERENCES musee(id,ville)
 )ENGINE=InnoDB;
 
 
@@ -103,11 +103,12 @@ CREATE TABLE Composer(
 #------------------------------------------------------------
 
 CREATE TABLE Avoir(
-        mail Varchar (100) NOT NULL ,
-        id   Int NOT NULL
-	,CONSTRAINT Avoir_PK PRIMARY KEY (mail,id)
+        mail  Varchar (100) NOT NULL ,
+        id    Int NOT NULL ,
+        ville Varchar (50) NOT NULL
+	,CONSTRAINT Avoir_PK PRIMARY KEY (mail,id,ville)
 
 	,CONSTRAINT Avoir_user_FK FOREIGN KEY (mail) REFERENCES user(mail)
-	,CONSTRAINT Avoir_musee0_FK FOREIGN KEY (id) REFERENCES musee(id)
+	,CONSTRAINT Avoir_musee0_FK FOREIGN KEY (id,ville) REFERENCES musee(id,ville)
 )ENGINE=InnoDB;
 
