@@ -22,12 +22,11 @@ On enregistre sa recherche afin qu'il puisse la revoir ultérieurement et le ren
 
 ## __Fonctionnement__:
 
-- http://localhost:8080/Mexpo
-
-        Page d'acceil du site
-
 
 ## __End-points__:
 
+- http://localhost:8080/Mexpo
+
+        Page d'acceil du site
 
 ## __Exemple de requetes__: 
