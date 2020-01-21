@@ -121,4 +121,3 @@ CREATE TABLE Avoir(
 	,CONSTRAINT Avoir_user_FK FOREIGN KEY (id) REFERENCES user(id)
 	,CONSTRAINT Avoir_musee0_FK FOREIGN KEY (id_musee) REFERENCES musee(id_musee)
 )ENGINE=InnoDB;
-
