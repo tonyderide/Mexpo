@@ -1,11 +1,12 @@
 package fr.simplon.repository;
 
+import fr.simplon.model.Musee;
 import org.springframework.data.repository.CrudRepository;
-
-import fr.simplon.model.User;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface MuseeRepository extends CrudRepository <Musee, Integer>{
 
 }
