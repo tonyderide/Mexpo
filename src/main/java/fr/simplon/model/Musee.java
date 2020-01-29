@@ -19,8 +19,7 @@ import lombok.ToString;
 public class Musee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMusee;
+    private String idMusee;
 
     private String nom;
     private String adresse;
