@@ -34,7 +34,8 @@ public class User {
 	private String mdp;
 	private boolean admin;
 
-	@OneToMany(cascade = CascadeType.REMOVE , fetch = FetchType.LAZY)
+	@ManyToMany
+	@JoinTable(name="Avoir")
 	private Collection<Musee> musee;
 	
 }
