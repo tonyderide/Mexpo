@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/users")
@@ -21,7 +24,36 @@ public class UserController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public User create(@RequestBody User newUser) {
 
+
         return userRepository.saveAndFlush(newUser);
+    }
+
+    @GetMapping
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<User> display() {
+        return userRepository.findAll();
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus (code = HttpStatus.OK)
+    public User update(@RequestBody User majUser) {
+
+
+
+        return userRepository.save(majUser);
+    }
+
+    @RequestMapping("/login")
+    @ResponseStatus (code = HttpStatus.OK)
+    public Optional<User> getUserMail(@RequestParam (value = "mail") String mail) {
+
+        Optional<User> request = null;
+        Optional<User> userMail = userRepository.findByMail(mail);
+
+        if (userMail.isPresent() ) {
+            request = userRepository.findByMail(mail);
+        }
+           return request;
     }
 
 }
