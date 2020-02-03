@@ -14,12 +14,12 @@ import lombok.ToString;
 import java.util.Collection;
 
 @Entity
-//@Getter
-//@Setter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode
-//@ToString
+/*@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString*/
 public class User {
 
 	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -153,6 +153,4 @@ public class User {
 
 
 	}
-
-
 }

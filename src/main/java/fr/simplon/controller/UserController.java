@@ -26,10 +26,15 @@ public class UserController {
      */
     @PostMapping("/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public User create(@RequestBody User newUser) {
+    public Optional<User> create(@RequestBody User newUser) {
 
+        Optional<User> reponse = null;
 
-        return userRepository.saveAndFlush(newUser);
+        if( !userRepository.findByMail(newUser.getMail()).isPresent()) {
+            reponse = Optional.of(userRepository.saveAndFlush(newUser)) ;
+        }
+
+        return reponse;
     }
 
     /**
@@ -44,38 +49,38 @@ public class UserController {
 
 
     /**
-     * permet a l'utilisateur de mettre son compte a jour
+     * permet a l'utilisateur de mettre son compte a jour.
      * @param majUser
      * @return
      */
-    @PutMapping("/update")
+    @PostMapping("/update")
     @ResponseStatus (code = HttpStatus.OK)
-    public User update(@RequestBody User majUser) {
+    public Optional<User> update(@RequestBody User majUser) {
 
 
-
-        return userRepository.save(majUser);
+        return Optional.of(userRepository.save(majUser));
     }
 
+
     /**
-     * Permet a l'utilisateur de se connecter a son compte .... TODO a vérifier ...
+     * Permet a l'utilisateur de se connecter a son compte.
      * @param mail
      * @param mdp
      * @return
      */
     @RequestMapping("/login")
     @ResponseStatus (code = HttpStatus.OK)
-    public Optional<User> getUserMail(@RequestParam (value = "mail") String mail,
+    public Optional<User> login(@RequestParam (value = "mail") String mail,
                                       @RequestParam(value = "mdp") String mdp) {
-
-        Optional<User> request = null;
+        
+        Optional<User> reponse = null;
         Optional<User> userMail = userRepository.findByMail(mail);
 
 
-        if (userMail.isPresent()) {
-            request = userRepository.findByMail(mail) ;
+        if (userMail.isPresent() && userMail.get().getMdp().equals(mdp)) {
+            reponse = userMail ;
         }
-           return request;
+           return reponse;
     }
 
 }
