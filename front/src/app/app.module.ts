@@ -12,6 +12,8 @@ import { LocalisationComponent } from './localisation/localisation.component';
 import { ThemeComponent } from './theme/theme.component';
 import { ArtistesComponent } from './artiste/artistes.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
+import { OeuvreComponent } from './oeuvre/oeuvre.component';
+import { ExpositionComponent } from './exposition/exposition.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { SeConnecterComponent } from './se-connecter/se-connecter.component';
     ThemeComponent,
     ArtistesComponent,
     SeConnecterComponent,
+    OeuvreComponent,
+    ExpositionComponent,
   ],
   imports: [
     BrowserModule,

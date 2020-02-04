@@ -6,14 +6,19 @@ import {LocalisationComponent} from "./localisation/localisation.component";
 import {MuseeComponent} from "./musee/musee.component";
 import {SeConnecterComponent} from "./se-connecter/se-connecter.component";
 import {ThemeComponent} from "./theme/theme.component";
+import {OeuvreComponent} from "./oeuvre/oeuvre.component";
+import {ExpositionComponent} from "./exposition/exposition.component";
 
 const routes: Routes = [
-  { path: 'acceuil', component: SearchMuseeComponent},
-  { path: 'artiste', component: ArtistesComponent },
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' },
+  { path: 'accueil', component: SearchMuseeComponent},
+  { path: 'artistes', component: ArtistesComponent },
   { path: 'localisation', component: LocalisationComponent },
-  { path: 'musee', component: MuseeComponent },
-  { path: 'seConnecter', component: SeConnecterComponent },
-  { path: 'themes', component: ThemeComponent}
+  { path: 'musees', component: MuseeComponent },
+  { path: 'seconnecter', component: SeConnecterComponent },
+  { path: 'themes', component: ThemeComponent},
+  { path: 'oeuvres', component: OeuvreComponent},
+  { path: 'expositions', component: ExpositionComponent}
 ];
 
 @NgModule({
