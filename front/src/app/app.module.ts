@@ -3,10 +3,15 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SearchMuseeComponent} from './search-musee/search-musee.component';
+import { SearchMuseeComponent} from './accueil/search-musee.component';
 import { FooterComponent } from './footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { MuseeComponent } from './musee/musee.component';
+import { LocalisationComponent } from './localisation/localisation.component';
+import { ThemeComponent } from './theme/theme.component';
+import { ArtistesComponent } from './artiste/artistes.component';
+import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +19,11 @@ import { HttpClientModule} from '@angular/common/http';
     NavbarComponent,
     SearchMuseeComponent,
     FooterComponent,
+    MuseeComponent,
+    LocalisationComponent,
+    ThemeComponent,
+    ArtistesComponent,
+    SeConnecterComponent,
   ],
   imports: [
     BrowserModule,
