@@ -1,6 +1,19 @@
 <div class="typeRecherche">
-    <select><option value="">--Pays--</option></select>
-    <select><option value="">--Régions--</option></select>
-    <select><option value="">--Départements--</option></select>
-    <select><option value="">--Villes--</option></select>
+    <select disabled>
+        <option>{{ catPays }}</option>
+        <option selected>France</option>
+    </select>
+    <select>
+        <option value="">{{ catRegion }}</option>
+        <!-- Parcourir une liste de régions pour remplir la balise option -->
+        <option *ngFor="let region of listRegions">{{region.nomRegion}}</option>
+    </select>
+    <select>
+        <option value="">{{ catDepartement }}</option>
+        <option *ngFor="let departement of listDepartements">{{departement.codeDepartement}}- {{departement.nomDepartement}}</option>
+    </select>
+    <select>
+        <option value="">{{ catVille }}</option>
+        <option *ngFor="let ville of listVilles">{{ville.nomVille}}</option>
+    </select>
 </div>
