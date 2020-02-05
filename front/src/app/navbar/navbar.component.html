@@ -1,7 +1,7 @@
 
 <header class="navbar">
   <div class="logo">{{title}}</div>
-  <nav>
+  <nav [className]="activeMenu ? 'active' : 'inactive'">
     <ul>
       <li><a routerLink="/accueil" class="active" routerLinkActive="active">Accueil</a></li>
       <li><a routerLink="/musees" class="nav-link" routerLinkActive="active">Musées</a></li>
@@ -14,5 +14,5 @@
     </ul>
   </nav>
 
-  <div class="menu-toggle"><i class="material-icons">menu</i></div>
+  <div (click)="handleClickMenu()" class="menu-toggle"><i class="material-icons">menu</i></div>
 </header>
