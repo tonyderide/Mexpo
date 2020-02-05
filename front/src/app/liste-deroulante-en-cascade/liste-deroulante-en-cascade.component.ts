@@ -25,34 +25,50 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
   ngOnInit() {
     this.getAllRegions();
     this.getAllDepartements();
-    //this.getAllVilles();
   }
 
-  // Récupérer le JSON du back grâce à la fonction getRegionList() du Service puis l'inscrire dans la listRegions
-  getAllRegions() {
-    this.museeService.getRegionList().subscribe((regions: Region[]) => {
-      this.listRegions = regions;
-    })
-  }
+  // Fonctions associées au Back
 
-  // Récupérer le JSON du back grâce à la fonction getDepartementList() du Service puis l'inscrire dans la listDepartements
-  getAllDepartements() {
-    this.museeService.getDepartementList().subscribe((departements: Departement[]) => {
-      this.listDepartements = departements;
-    })
-  }
+    getAllRegions() {
+      this.museeService.getRegionList().subscribe((regions: Region[]) => {
+        this.listRegions = regions;
+      })
+    }
 
-  // Récupérer le JSON du back grâce à la fonction getVilleList() du Service puis l'inscrire dans la listVilles
-  getAllVilles() {
-    this.museeService.getVilleList().subscribe((villes: Ville[]) => {
-      this.listVilles = villes;
-    })
-  }
+    getAllDepartements() {
+      this.museeService.getDepartementList().subscribe((departements: Departement[]) => {
+        this.listDepartements = departements;
+      })
+    }
+
+    getAllVilles() {
+      this.museeService.getVilleList().subscribe((villes: Ville[]) => {
+        this.listVilles = villes;
+      })
+    }
+
+    getAllDepartementsByRegion(codeRegion : String) {    
+      this.museeService.getDepartementsByRegion(codeRegion).subscribe((departements: Departement[]) => {
+        this.listDepartements = departements;
+      })
+    }
+    
+    getAllVillesByDepartement(codeDepartement : String) {    
+      this.museeService.getVillesByDepartement(codeDepartement).subscribe((villes: Ville[]) => {
+        this.listVilles = villes;
+      })
+    }
   
-  getAllDepartementsByRegion(codeRegion : String) {
-    this.museeService.getDepartementsByRegion(codeRegion).subscribe((departements: Departement[]) => {
-      this.listDepartements = departements;
-    })
+  // Fonctions des évènements associés
+
+  handleSelectRegion(evt) {
+    let codeRegion = evt.target.value;
+    this.getAllDepartementsByRegion(codeRegion);
+  }
+
+  handleSelectDepartement(evt) {
+    let codeDepartement = evt.target.value;
+    this.getAllVillesByDepartement(codeDepartement);
   }
 
 }

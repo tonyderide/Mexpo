@@ -3,14 +3,13 @@
         <option>{{ catPays }}</option>
         <option selected>France</option>
     </select>
-    <select>
-        <option value="">{{ catRegion }}</option>
-        <!-- Parcourir une liste de régions pour remplir la balise option -->
-        <option *ngFor="let region of listRegions">{{region.nomRegion}}</option>
+    <select (change)="handleSelectRegion($event)">
+        <option value="-1" >{{ catRegion }}</option>
+        <option *ngFor="let region of listRegions" value={{region.codeRegion}}>{{region.nomRegion}}</option>
     </select>
-    <select>
+    <select (change)="handleSelectDepartement($event)">
         <option value="">{{ catDepartement }}</option>
-        <option *ngFor="let departement of listDepartements">{{departement.codeDepartement}}- {{departement.nomDepartement}}</option>
+        <option *ngFor="let departement of listDepartements" value={{departement.codeDepartement}}>{{departement.codeDepartement}}- {{departement.nomDepartement}}</option>
     </select>
     <select>
         <option value="">{{ catVille }}</option>

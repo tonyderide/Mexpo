@@ -28,7 +28,12 @@ export class MuseeService {
 
   // Récupérer le JSON des départements d'une région spécifique
   getDepartementsByRegion(codeRegion: String) : Observable<any> {
-    return this.http.get(this.baseUrl + codeRegion + "/departements");
+    return this.http.get(this.baseUrl + "regions/" + codeRegion + "/departements");
+  }
+
+  // Récupérer le JSON des villes d'un département spécifique
+  getVillesByDepartement(codeDepartement: String) : Observable<any> {
+    return this.http.get(this.baseUrl + "departements/" + codeDepartement + "/villes");
   }
 
 }
