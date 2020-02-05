@@ -15,6 +15,9 @@ import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { OeuvreComponent } from './oeuvre/oeuvre.component';
 import { ExpositionComponent } from './exposition/exposition.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { CarteRegionComponent } from './carte-region/carte-region.component';
+import { ListeDeroulanteEnCascadeComponent } from './liste-deroulante-en-cascade/liste-deroulante-en-cascade.component';
+import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-resultat-musee.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { AccueilComponent } from './accueil/accueil.component';
     OeuvreComponent,
     ExpositionComponent,
     AccueilComponent,
+    CarteRegionComponent,
+    ListeDeroulanteEnCascadeComponent,
+    TableauResultatMuseeComponent,
 
   ],
   imports: [
