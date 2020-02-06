@@ -18,7 +18,8 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
   listRegions: Region[];
   listDepartements: Departement[];
   listVilles: Ville[];
-
+  activeListe: boolean = true;
+  
   @Input() codeRegionCarte: String;
 
   constructor(private museeService: MuseeService) { }
@@ -33,12 +34,18 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
     for (let propName in changes) {
       console.log(propName, changes[propName].currentValue);
       if (propName === 'codeRegionCarte') {
+        // Récupérer le codeRegion de l'entité Parent suite au changement de l'attribut constaté par ngOnChanges
         let codeRegion = changes[propName].currentValue;
+        // Afficher la région sélectionnée sur la carte dans la barre défilante des Régions
+        
+        // Télécharger la liste de tous les départements pour la région sélectionnée sur la carte
         this.getAllDepartementsByRegion(codeRegion);
       }
 
     }
   }
+
+
   
   // Fonctions associées au Back
 
@@ -76,7 +83,18 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
 
   handleSelectRegion(evt) {
     let codeRegion = evt.target.value;
-    this.getAllDepartementsByRegion(codeRegion);
+    
+    if (codeRegion !== "-1") {
+      this.getAllDepartementsByRegion(codeRegion);
+      // Activer la liste des villes
+      this.activeListe = false;
+    }
+    else {
+      this.getAllDepartements();
+      // Désactiver la liste des villes
+      this.activeListe = true;
+    }
+    
   }
 
   handleSelectDepartement(evt) {

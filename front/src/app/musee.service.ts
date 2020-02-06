@@ -36,4 +36,29 @@ export class MuseeService {
     return this.http.get(this.baseUrl + "departements/" + codeDepartement + "/villes");
   }
 
+  // Récupérer le JSON de tous les musées
+  getAllMusees() : Observable<any> {
+    return this.http.get(this.baseUrl + "musees");
+  }
+
+  // Récupérer le JSON de tous les musées dans une région
+  getMuseesByRegion(codeRegion: String) : Observable<any> {
+    return this.http.get(this.baseUrl + "regions/" + codeRegion + "/musees");
+  }
+
+  // Récupérer le JSON de tous les musées dans un département
+  getMuseesByDepartement(codeDepartement: String) : Observable<any> {
+    return this.http.get(this.baseUrl + "departements/" + codeDepartement + "/musees");
+  }
+  
+  // Récupérer le JSON des musées d'une ville spécifique
+  getMuseesByVille(codeVille : String) : Observable<any> {
+    return this.http.get(this.baseUrl + "villes/" + codeVille + "/musees");
+  }
+
+  // Récupérer le JSON d'un musée spécifique
+  getMuseeById(idMusee : String) : Observable<any> {
+    return this.http.get(this.baseUrl + "musees/" + idMusee);
+  }
+
 }

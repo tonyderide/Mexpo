@@ -8,11 +8,11 @@
         <option *ngFor="let region of listRegions" value={{region.codeRegion}}>{{region.nomRegion}}</option>
     </select>
     <select (change)="handleSelectDepartement($event)">
-        <option value="">{{ catDepartement }}</option>
+        <option value="-1">{{ catDepartement }}</option>
         <option *ngFor="let departement of listDepartements" value={{departement.codeDepartement}}>{{departement.codeDepartement}}- {{departement.nomDepartement}}</option>
     </select>
-    <select disabled>
-        <option value="">{{ catVille }}</option>
+    <select [disabled]="activeListe">
+        <option value="-1">{{ catVille }}</option>
         <option *ngFor="let ville of listVilles">{{ville.nomVille}}</option>
     </select>
 </div>
