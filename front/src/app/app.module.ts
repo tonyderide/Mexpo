@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SearchMuseeComponent} from './accueil/search-musee.component';
+import { SearchMuseeComponent} from './searchbar/search-musee.component';
 import { FooterComponent } from './footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
@@ -14,6 +14,11 @@ import { ArtistesComponent } from './artiste/artistes.component';
 import { SeConnecterComponent } from './se-connecter/se-connecter.component';
 import { OeuvreComponent } from './oeuvre/oeuvre.component';
 import { ExpositionComponent } from './exposition/exposition.component';
+import { AccueilComponent } from './accueil/accueil.component';
+import { CarteRegionComponent } from './carte-region/carte-region.component';
+import { ListeDeroulanteEnCascadeComponent } from './liste-deroulante-en-cascade/liste-deroulante-en-cascade.component';
+import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-resultat-musee.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +33,11 @@ import { ExpositionComponent } from './exposition/exposition.component';
     SeConnecterComponent,
     OeuvreComponent,
     ExpositionComponent,
+    AccueilComponent,
+    CarteRegionComponent,
+    ListeDeroulanteEnCascadeComponent,
+    TableauResultatMuseeComponent,
+
   ],
   imports: [
     BrowserModule,
