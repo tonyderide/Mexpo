@@ -7,12 +7,12 @@
     <section class="conteneurCentral">
         
         <div class="blocGauche">
-            <app-carte-region></app-carte-region>
+            <app-carte-region (codeRegionCarte)="onCodeRegionCarte($event)"></app-carte-region>
         </div>
         
         <div class="blocDroite">
 
-            <app-liste-deroulante-en-cascade></app-liste-deroulante-en-cascade>
+            <app-liste-deroulante-en-cascade [codeRegionCarte]="codeRegionCarte" ></app-liste-deroulante-en-cascade>
 
             <app-tableau-resultat-musee></app-tableau-resultat-musee>
 

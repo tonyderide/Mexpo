@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-carte-region',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarteRegionComponent implements OnInit {
 
+  @Output() codeRegionCarte = new EventEmitter<String>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  recupererCodeRegion(valeur : String) {
+    console.log(valeur);
+    this.codeRegionCarte.emit(valeur);
   }
 
 }

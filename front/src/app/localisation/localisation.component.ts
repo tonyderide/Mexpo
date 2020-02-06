@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocalisationComponent implements OnInit {
 
+  codeRegionCarte : String = '';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onCodeRegionCarte(st : String) {
+    this.codeRegionCarte = st;
   }
 
 }

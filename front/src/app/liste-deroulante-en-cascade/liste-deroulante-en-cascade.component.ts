@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { Region } from '../models/region';
 import { MuseeService } from '../musee.service';
 import { Departement } from '../models/departement';
@@ -19,6 +19,8 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
   listDepartements: Departement[];
   listVilles: Ville[];
 
+  @Input() codeRegionCarte: String;
+
   constructor(private museeService: MuseeService) { }
 
   // Au chargement de la page
@@ -27,38 +29,49 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
     this.getAllDepartements();
   }
 
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    for (let propName in changes) {
+      console.log(propName, changes[propName].currentValue);
+      if (propName === 'codeRegionCarte') {
+        let codeRegion = changes[propName].currentValue;
+        this.getAllDepartementsByRegion(codeRegion);
+      }
+
+    }
+  }
+  
   // Fonctions associées au Back
 
-    getAllRegions() {
-      this.museeService.getRegionList().subscribe((regions: Region[]) => {
-        this.listRegions = regions;
-      })
-    }
+  getAllRegions() {
+    this.museeService.getRegionList().subscribe((regions: Region[]) => {
+      this.listRegions = regions;
+    })
+  }
 
-    getAllDepartements() {
-      this.museeService.getDepartementList().subscribe((departements: Departement[]) => {
-        this.listDepartements = departements;
-      })
-    }
+  getAllDepartements() {
+    this.museeService.getDepartementList().subscribe((departements: Departement[]) => {
+      this.listDepartements = departements;
+    })
+  }
 
-    getAllVilles() {
-      this.museeService.getVilleList().subscribe((villes: Ville[]) => {
-        this.listVilles = villes;
-      })
-    }
+  getAllVilles() {
+    this.museeService.getVilleList().subscribe((villes: Ville[]) => {
+      this.listVilles = villes;
+    })
+  }
 
-    getAllDepartementsByRegion(codeRegion : String) {    
-      this.museeService.getDepartementsByRegion(codeRegion).subscribe((departements: Departement[]) => {
-        this.listDepartements = departements;
-      })
-    }
-    
-    getAllVillesByDepartement(codeDepartement : String) {    
-      this.museeService.getVillesByDepartement(codeDepartement).subscribe((villes: Ville[]) => {
-        this.listVilles = villes;
-      })
-    }
-  
+  getAllDepartementsByRegion(codeRegion: String) {
+    this.museeService.getDepartementsByRegion(codeRegion).subscribe((departements: Departement[]) => {
+      this.listDepartements = departements;
+    })
+  }
+
+  getAllVillesByDepartement(codeDepartement: String) {
+    this.museeService.getVillesByDepartement(codeDepartement).subscribe((villes: Ville[]) => {
+      this.listVilles = villes;
+    })
+  }
+
   // Fonctions des évènements associés
 
   handleSelectRegion(evt) {
