@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MuseeService} from '../musee.service';
+import {Musee} from '../models/musee';
 
 @Component({
   selector: 'app-musee',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MuseeComponent implements OnInit {
 
-  constructor() { }
+  musee: Musee;
+
+  constructor(private museeService: MuseeService) {}
 
   ngOnInit() {
+    this.museeService.getMuseeById('1');
   }
 
 }
