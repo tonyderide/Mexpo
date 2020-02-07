@@ -42,12 +42,9 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
         // Relier le codeRegion sélectionné sur la carte à la barre défilante des Régions pour l'affichage
         this.selected = codeRegion;
         // Télécharger la liste de tous les départements pour la région sélectionnée sur la carte
-        if (codeRegion !== '-1'){
-          this.getAllDepartementsByRegion(codeRegion);
-          //this.activeListe = false;
-        }
+        this.getAllDepartementsByRegion(codeRegion);
       }
-    }
+    } 
   }
 
   // Fonctions associées au Back

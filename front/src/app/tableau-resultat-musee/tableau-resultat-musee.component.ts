@@ -30,6 +30,27 @@ export class TableauResultatMuseeComponent implements OnInit {
     })
   }
 
+  getMuseesByRegions(codeRegion : String) {
+    this.museeService.getMuseesByRegion(codeRegion).subscribe((musees: Musee[]) => {
+      this.listMusees = musees;
+      this.setDataSourceTab();
+    })
+  }
+
+  getMuseesByDepartements(codeDepeartement : String) {
+    this.museeService.getMuseesByDepartement(codeDepeartement).subscribe((musees: Musee[]) => {
+      this.listMusees = musees;
+      this.setDataSourceTab();
+    })
+  }
+
+  getMuseesByVilles(codeVille : String) {
+    this.museeService.getMuseesByVille(codeVille).subscribe((musees: Musee[]) => {
+      this.listMusees = musees;
+      this.setDataSourceTab();
+    })
+  }
+
   setDataSourceTab() {
     this.dataSource = new MatTableDataSource<Musee>(this.listMusees);
     this.dataSource.paginator = this.paginator;
