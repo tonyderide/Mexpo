@@ -37,7 +37,7 @@ export class MuseeService {
   }
 
   // Récupérer le JSON de tous les musées
-  getAllMusees() : Observable<any> {
+  getMuseesList() : Observable<any> {
     return this.http.get(this.baseUrl + "musees");
   }
 

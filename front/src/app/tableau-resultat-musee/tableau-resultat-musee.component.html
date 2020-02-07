@@ -1,82 +1,29 @@
-<table class="tableauResultat">
-    <thead>
-        <tr>
-            <th>Rang</th>
-            <th>Nom</th>
-            <th>Adresse</th>
-            <th>Réservation</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Musée du Louvre</td>
-            <td>Rue de Rivoli, 75001 Paris</td>
-            <td><i class="material-icons">add_shopping_cart</i></td>
-        </tr>
-    </tbody>
-</table>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
 
-<div class="pagination">
-    <a href="#" class="prev"><i class="material-icons">chevron_left</i></a>
-    <a href="#" class="num activePagination">1</a>
-    <a href="#" class="num">2</a>
-    <a href="#" class="num">3</a>
-    <a href="#" class="num">4</a>   
-    <a href="#" class="num">5</a>
-    <a href="#" class="next"><i class="material-icons">chevron_right</i></a>
+    <ng-container matColumnDef="N°">
+        <th mat-header-cell *matHeaderCellDef> N° </th>
+        <td mat-cell *matCellDef="let musee"> {{musee.idMusee}}. </td>
+      </ng-container>
+    
+    <ng-container matColumnDef="Musée">
+      <th mat-header-cell *matHeaderCellDef> Musée </th>
+      <td mat-cell *matCellDef="let musee"> {{musee.nomMusee}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Adresse">
+      <th mat-header-cell *matHeaderCellDef> Adresse </th>
+      <td mat-cell *matCellDef="let musee"> {{musee.adresse}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Reservation">
+      <th mat-header-cell *matHeaderCellDef> Réservation </th>
+      <td mat-cell *matCellDef="let musee"> {{musee.siteWeb}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

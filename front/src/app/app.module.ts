@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchMuseeComponent} from './searchbar/search-musee.component';
 import { FooterComponent } from './footer/footer.component';
-import {FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { MuseeComponent } from './musee/musee.component';
 import { LocalisationComponent } from './localisation/localisation.component';
@@ -20,6 +19,9 @@ import { ListeDeroulanteEnCascadeComponent } from './liste-deroulante-en-cascade
 import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-resultat-musee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,14 +40,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CarteRegionComponent,
     ListeDeroulanteEnCascadeComponent,
     TableauResultatMuseeComponent,
-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    AppRoutingModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
