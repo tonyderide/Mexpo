@@ -18,6 +18,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { CarteRegionComponent } from './carte-region/carte-region.component';
 import { ListeDeroulanteEnCascadeComponent } from './liste-deroulante-en-cascade/liste-deroulante-en-cascade.component';
 import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-resultat-musee.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
