@@ -3,9 +3,9 @@
         <option>{{ catPays }}</option>
         <option selected>France</option>
     </select>
-    <select (change)="handleSelectRegion($event)" (codeRegionCarte)="getCodeRegionCarte($event)">
-        <option value="-1" >{{ catRegion }}</option>
-        <option *ngFor="let region of listRegions" value={{region.codeRegion}}>{{region.nomRegion}}</option>
+    <select (change)="handleSelectRegion($event)" (codeRegionCarte)="getCodeRegionCarte($event)" >
+        <option value="-1" selected>{{ catRegion }}</option>
+        <option *ngFor="let region of listRegions" value={{region.codeRegion}} [selected]="region.codeRegion===selected">{{region.nomRegion}}</option>
     </select>
     <select (change)="handleSelectDepartement($event)">
         <option value="-1">{{ catDepartement }}</option>
