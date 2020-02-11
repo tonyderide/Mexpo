@@ -1,5 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+
+import { Pipe, PipeTransform } from '@angular/core';
+import { Directive } from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,15 +21,24 @@ import { CarteRegionComponent } from './carte-region/carte-region.component';
 import { ListeDeroulanteEnCascadeComponent } from './liste-deroulante-en-cascade/liste-deroulante-en-cascade.component';
 import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-resultat-musee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { ImageMuseesComponent } from './image-musees/image-musees.component';
 import { ImageThemesComponent } from './image-themes/image-themes.component';
+import {
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatIconModule,
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule } from "@angular/material";
+import {MatInputModule} from '@angular/material';
+import { MatAutocompleteModule } from "@angular/material/";
 
 @NgModule({
   declarations: [
+
     AppComponent,
     NavbarComponent,
     SearchMuseeComponent,
@@ -44,7 +56,7 @@ import { ImageThemesComponent } from './image-themes/image-themes.component';
     TableauResultatMuseeComponent,
     ImageMuseesComponent,
     ImageThemesComponent,
-  ],
+],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -53,7 +65,17 @@ import { ImageThemesComponent } from './image-themes/image-themes.component';
     AppRoutingModule,
     MatPaginatorModule,
     MatTableModule,
-  ],
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
