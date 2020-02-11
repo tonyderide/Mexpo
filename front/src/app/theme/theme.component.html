@@ -1,1 +1,25 @@
-<p>theme works!</p>
+<div class='conteneurAll'>
+    <!--Composant 2 : Barre de recherche-->
+
+    <app-search-musee></app-search-musee>
+
+        <!--Composant 3 : Bloc affichage-->
+    <section class="conteneurCentral">
+        
+        <div class="blocGauche">
+            <app-carte-region (codeRegionCarte)="onCodeRegionCarte($event)"></app-carte-region>
+        </div>
+        
+        <div class="blocDroite">
+
+            <app-liste-deroulante-en-cascade></app-liste-deroulante-en-cascade>
+
+            <div class="mat-app-background basic-container">
+                <app-tableau-resultat-musee ></app-tableau-resultat-musee>
+            </div>
+            
+        </div>
+
+    </section>
+
+</div>
