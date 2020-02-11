@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class LocalisationComponent implements OnInit {
 
   codeRegionCarte : String = '-1';
+  codeRegionListeDeroulante : String = '-1';
+  codeDepartementListeDeroulante : String = '-1';
+  codeVilleListeDeroulante : String = '-1';
 
   constructor() { }
 
@@ -16,6 +19,18 @@ export class LocalisationComponent implements OnInit {
 
   onCodeRegionCarte(st : String) {
     this.codeRegionCarte = st;
+  }
+
+  onCodeRegionListeDeroulante(st : String) {
+    this.codeRegionListeDeroulante = st;
+  }
+
+  onCodeDepartementListeDeroulante(st : String) {
+    this.codeDepartementListeDeroulante = st;
+  }
+
+  onCodeVilleListeDeroulante(st: String) {
+    this.codeVilleListeDeroulante = st;
   }
 
 }

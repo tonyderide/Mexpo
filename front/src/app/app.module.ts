@@ -22,6 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { ImageMuseesComponent } from './image-musees/image-musees.component';
+import { ImageThemesComponent } from './image-themes/image-themes.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { FormsModule } from '@angular/forms';
     CarteRegionComponent,
     ListeDeroulanteEnCascadeComponent,
     TableauResultatMuseeComponent,
+    ImageMuseesComponent,
+    ImageThemesComponent,
   ],
   imports: [
     BrowserModule,

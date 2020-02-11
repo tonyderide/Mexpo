@@ -1,14 +1,23 @@
-<div class="containerAll">
-  <div class="containerPrincipal">
-    <div class="nomMusee">
-<!--      <h3>{{musee.nomMusee}} nomdumusee</h3>-->
-      <h3>nom du musée</h3>
-    </div>
-    <div class="containerPhoto"></div>
-    <div class="containerDescription">
-    </div>
-    <div class="containerOeuvre">
+<div class='conteneurAll'>
+  <!--Composant 2 : Barre de recherche-->
 
-    </div>
-  </div>
+  <app-search-musee></app-search-musee>
+
+      <!--Composant 3 : Bloc affichage-->
+  <section class="conteneurCentral">
+      
+      <div class="blocGauche">
+        <app-image-musees></app-image-musees>
+      </div>
+      
+      <div class="blocDroite">
+
+          <div class="mat-app-background basic-container">
+              <app-tableau-resultat-musee></app-tableau-resultat-musee>
+          </div>
+          
+      </div>
+
+  </section>
+
 </div>
