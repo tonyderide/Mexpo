@@ -22,6 +22,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ImageMuseesComponent } from './image-musees/image-musees.component';
+import { ImageThemesComponent } from './image-themes/image-themes.component';
+import {
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatIconModule,
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule } from "@angular/material";
+import {MatInputModule} from '@angular/material';
+import { MatAutocompleteModule } from "@angular/material/";
 
 @NgModule({
   declarations: [
@@ -49,7 +60,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     MatPaginatorModule,
     MatTableModule,
-    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
