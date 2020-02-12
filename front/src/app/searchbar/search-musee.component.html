@@ -1,7 +1,14 @@
+
 <div class="searchBar">
 <!--<mat-form-field>-->
-  <input type="text" class="inputSearchBar" matInput  [matAutocomplete]="auto" placeholder="Recherche">
+  <input type="text" placeholder="Recherche" class="inputSearchBar" matInput
+         [formControl]="myControl"
+         [matAutocomplete]="auto" >
 <!--</mat-form-field>-->
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let musee of listMusee$" [value]="musee">{{musee.nomMusee}}</mat-option>
+</mat-autocomplete>
   <select>
     <option value="">--Options--</option>
     <option value="musees">Musées</option>
@@ -14,23 +21,3 @@
 
   <div class="searchBttn"><i class="material-icons">search</i></div>
 </div>
-
-
-<!--<ul class="search-result">-->
-<!--  <li *ngFor="let musee of listMusee$ | async " >-->
-<!--    <a routerLink="/musees/{{musee.idMusee}}">-->
-<!--      {{musee.nomMusee}}-->
-<!--    </a>-->
-<!--  </li>-->
-<!--</ul>-->
-<mat-form-field>
-  <input type="text" matInput  [matAutocomplete]="auto">
-</mat-form-field>
-
-<mat-autocomplete #auto="matAutocomplete">
-  <mat-option *ngFor="let musee of listMusee$" [value]="musee">{{musee.nomMusee}}</mat-option>
-</mat-autocomplete>
-
-
-
-

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from "rxjs";
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
 import { Musee} from '../models/musee'
 import { MuseeService } from "../musee.service";
+import {FormControl} from "@angular/forms";
 
 
 @Component({
@@ -13,14 +14,25 @@ import { MuseeService } from "../musee.service";
 
 export class SearchMuseeComponent implements OnInit {
   listMusee$: Musee[];
-  private searchTerms = new Subject<string>();
-
+ // private searchTerms = new Subject<string>();
+  myControl: FormControl = new FormControl();
+  filteredOption : Observable<string[]>;
+  displayFn(subject){ return subject ? subject.nomMusee : undefined; }
 
   constructor(private museeService: MuseeService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.recupeMuseeList();
+    this.filteredOption = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
+    console.log(this.filteredOption);
+  }
+  filter(val: string): string[]{
+    return this.listMusee$.map(musee => musee.nomMusee).filter(option =>
+    option.toLowerCase().includes(val.toLowerCase()));
   }
 
   recupeMuseeList(): void {
@@ -30,6 +42,8 @@ export class SearchMuseeComponent implements OnInit {
         console.log(this.listMusee$);
       });
   };
+
+
 }
 // ngOnInit(): void {
 //   // console.log(this.museeService.getMuseesList());
