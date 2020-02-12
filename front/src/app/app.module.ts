@@ -51,6 +51,8 @@ import { MatAutocompleteModule } from "@angular/material/";
     CarteRegionComponent,
     ListeDeroulanteEnCascadeComponent,
     TableauResultatMuseeComponent,
+    ImageMuseesComponent,
+    ImageThemesComponent,
   ],
   imports: [
     BrowserModule,

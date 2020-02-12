@@ -13,27 +13,27 @@ import {FormControl} from "@angular/forms";
 })
 
 export class SearchMuseeComponent implements OnInit {
-  listMusee$: Musee[];
- // private searchTerms = new Subject<string>();
-  myControl: FormControl = new FormControl();
-  filteredOption : Observable<string[]>;
-  displayFn(subject){ return subject ? subject.nomMusee : undefined; }
+     listMusee$: Musee[];
+     private searchTerms = new Subject<string>();
+     myControl: FormControl = new FormControl();
+     //filteredOption : Observable<string[]>;
+     displayFn(subject){ return subject ? subject.nomMusee : undefined; }
 
   constructor(private museeService: MuseeService) {
   }
 
   ngOnInit(): void{
     this.recupeMuseeList();
-    this.filteredOption = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(val => this.filter(val))
-      );
-    console.log(this.filteredOption);
+    // this.filteredOption = this.myControl.valueChanges.pipe(
+    //     startWith(''),
+    //     map(val => this.filter(val))
+    //   );
+    // console.log(this.filteredOption);
   }
-  filter(val: string): string[]{
-    return this.listMusee$.map(musee => musee.nomMusee).filter(option =>
-    option.toLowerCase().includes(val.toLowerCase()));
-  }
+  // filter(val: string): string[]{
+  //   return this.listMusee$.map(musee => musee.nomMusee).filter(option =>
+  //   option.toLowerCase().includes(val.toLowerCase()));
+  // }
 
   recupeMuseeList(): void {
     this.museeService.getMuseesList()
