@@ -23,7 +23,7 @@ import { TableauResultatMuseeComponent } from './tableau-resultat-musee/tableau-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/';
 import { MatTableModule } from '@angular/material/table';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ImageMuseesComponent } from './image-musees/image-musees.component';
 import { ImageThemesComponent } from './image-themes/image-themes.component';
 import {
@@ -74,8 +74,9 @@ import { MatAutocompleteModule } from "@angular/material/";
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule
-    ],
+    MatAutocompleteModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

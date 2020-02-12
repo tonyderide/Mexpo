@@ -9,12 +9,22 @@ import {Musee} from '../models/musee';
 })
 export class MuseeComponent implements OnInit {
 
-  musee: Musee;
+  musee = Musee;
+  idMusee = 'M0002';
 
-  constructor(private museeService: MuseeService) {}
-
-  ngOnInit() {
-    this.museeService.getMuseeById('1');
+  constructor(private museeService: MuseeService) {
   }
 
+  ngOnInit() {
+    this.recupeMusee()
+
+  }
+
+  recupeMusee(): void {
+    this.museeService.getMuseeById('idMusee')
+      .subscribe((musee)=>{
+        this.musee=musee;
+        console.log(musee);
+      });
+  }
 }
