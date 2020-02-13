@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent  {
   title = 'M&xpo';
-  activeMenu: boolean = false;;
+  activeMenu: boolean = false;
 
   handleClickMenu(){
     this.activeMenu = !this.activeMenu;

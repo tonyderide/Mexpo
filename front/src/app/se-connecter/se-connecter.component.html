@@ -43,7 +43,7 @@
     <label>Mot de passe</label>
     <input type="password" placeholder="Entrer un mot de passe" name="password"  [(ngModel)]="user.mdp" required>
 
-    <span>Votre compte a bien était créer</span>
+    <span *ngIf="success === true" (click)="inscription()">Votre compte a bien été créé</span>
 
     <button type="submit" id='submit' value='INSCRIPTION'>INSCRIPTION</button>
 

@@ -11,6 +11,7 @@ export class SeConnecterComponent implements OnInit {
 
   affichage : boolean = true;
   user: User = new User();
+  success : boolean = false;
 
   constructor(private auth : AuthentificationService) { }
 
@@ -22,8 +23,14 @@ export class SeConnecterComponent implements OnInit {
     console.log('Données du formulaire...', this.user);
     this.auth.postAddUser(this.user).subscribe(user => user);
     console.log(this.user);
+    this.success = true;
+    setTimeout(
+      () => {
+        this.success = false;
+        this.onConnexion();
+      }, 2500
+    );
   }
-
 
   onConnexion(){
     this.affichage = true;
