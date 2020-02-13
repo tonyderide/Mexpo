@@ -1,13 +1,14 @@
 
 <div class="searchBar">
-<!--<mat-form-field>-->
-  <input type="text" placeholder="Recherche" class="inputSearchBar" matInput
+  <input type="text" placeholder="Recherche" class="inputSearchBar"
+         matInput
          [formControl]="myControl"
-         [matAutocomplete]="auto" >
-<!--</mat-form-field>-->
-
+         [matAutocomplete]="auto">
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-  <mat-option *ngFor="let musee of listMusee$" [value]="musee">{{musee.nomMusee}}</mat-option>
+<!--  <mat-option *ngFor="let musee of listMusee$" [value]="musee">{{musee.nomMusee}}</mat-option>-->
+  <mat-option *ngFor="let option of filteredOption | async" [value]="option">
+    {{option}}
+  </mat-option>
 </mat-autocomplete>
   <select>
     <option value="">--Options--</option>
