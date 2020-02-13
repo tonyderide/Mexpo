@@ -32,9 +32,7 @@ export class SearchMuseeComponent implements OnInit {
       );
   }
     private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
-
-      return this.listNomMusee.filter(option => option.toLowerCase().includes(filterValue));
+      return this.listNomMusee.filter(option => option.toLowerCase().includes(value.toLowerCase()));
     }
 
   recupeMuseeList(): void {
@@ -44,8 +42,8 @@ export class SearchMuseeComponent implements OnInit {
 
 
   }
-
   displayFn(subject) {return subject ? subject.nomMusee : undefined;}
+
 
 
 
