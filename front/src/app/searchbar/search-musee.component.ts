@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from "rxjs";
-import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {filter, map, startWith} from 'rxjs/operators';
 import { Musee } from '../models/musee'
-import { MuseeService } from "../musee.service";
-import {FormControl} from "@angular/forms";
-import { options } from "../searchbar/listNomMusee"
+import { MuseeService } from '../musee.service';
+import {FormControl} from '@angular/forms';
+import { options } from '../searchbar/listNomMusee'
 
 @Component({
   selector: 'app-search-musee',
@@ -13,41 +13,40 @@ import { options } from "../searchbar/listNomMusee"
 })
 
 export class SearchMuseeComponent implements OnInit {
-  listMusee$: Musee[];
-  // private searchTerms = new Subject<string>();
-  myControl: FormControl = new FormControl();
-  filteredOption : Observable<string[]>;
-  listNomMusee= options;
-  nomMusee: string;
+  myControl = new FormControl();
+  listMusee: Musee[] = [];
+  listNomMusee = options;
+  filteredOption: Observable<Musee[]>;
+  displayFn(subject) {return subject ? subject.nomMusee : undefined; }
 
   constructor(private museeService: MuseeService) {
   }
 
   ngOnInit(): void {
     this.recupeMuseeList();
+    console.log(this.recupeMuseeList())
     this.filteredOption = this.myControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value => typeof value === 'string' ? value : value.name),
+        map(value => value ? this._filter(value) : this.listMusee.slice())
       );
   }
-    private _filter(value: string): string[] {
-      return this.listNomMusee.filter(option => option.toLowerCase().includes(value.toLowerCase()));
-    }
 
-  recupeMuseeList(): void {
-    this.museeService.getMuseesList()
-      .subscribe((musee$: Musee[]) => { this.listMusee$ = musee$;
-      });
+  // displayFn(musee: Musee): string {
+  //   return musee && musee.idMusee ? musee.idMusee : '';
+  // }
 
-
+  private _filter(name: string): Musee[] {
+    const filterValue = name;
+    return this.listMusee.filter(option => option.idMusee/*.toLowerCase()*/.indexOf(filterValue) === 0);
   }
-  displayFn(subject) {return subject ? subject.nomMusee : undefined;}
 
 
-
-
-
+  recupeMuseeList() {
+    return this.museeService.getMuseesList()
+      .subscribe((musee$) => {this.listMusee = musee$; });
+  }
 }
 // ngOnInit(): void {
 //   // console.log(this.museeService.getMuseesList());
