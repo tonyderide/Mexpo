@@ -17,7 +17,7 @@ export class SearchMuseeComponent implements OnInit {
   listMusee: Musee[] = [];
   listNomMusee = options;
   filteredOption: Observable<Musee[]>;
-  displayFn(subject) {return subject ? subject.nomMusee : undefined; }
+  // displayFn(subject) {return subject ? subject.nomMusee : subject; }
 
   constructor(private museeService: MuseeService) {
   }
@@ -28,18 +28,18 @@ export class SearchMuseeComponent implements OnInit {
     this.filteredOption = this.myControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(value => value ? this._filter(value) : this.listMusee.slice())
+        map(value => typeof value === 'string' ? value : value.nomMusee),
+        map(nomMusee => nomMusee ? this._filter(nomMusee) : this.listMusee.slice())
       );
   }
 
-  // displayFn(musee: Musee): string {
-  //   return musee && musee.idMusee ? musee.idMusee : '';
-  // }
+  displayFn(musee: Musee): string {
+    return musee && musee.nomMusee ? musee.nomMusee : '';
+  }
 
   private _filter(name: string): Musee[] {
     const filterValue = name;
-    return this.listMusee.filter(option => option.idMusee/*.toLowerCase()*/.indexOf(filterValue) === 0);
+    return this.listMusee.filter(option => option.nomMusee/*.toLowerCase()*/.indexOf(filterValue) === 0);
   }
 
 
