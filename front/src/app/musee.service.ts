@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Musee} from './models/musee';
 
 @Injectable({
   providedIn: 'root'
@@ -40,15 +41,15 @@ export class MuseeService {
   getVillesByRegion(codeRegion: String) : Observable<any> {
     return this.http.get(this.baseUrl + "regions/" + codeRegion + "/villes");
   }
-  
+
   // Récupérer le JSON des villes d'un département spécifique
   getVillesByDepartement(codeDepartement: String) : Observable<any> {
     return this.http.get(this.baseUrl + "departements/" + codeDepartement + "/villes");
   }
 
   // Récupérer le JSON de tous les musées
-  getMuseesList() : Observable<any> {
-    return this.http.get(this.baseUrl + "musees");
+  getMuseesList(): Observable<Musee[]> {
+    return this.http.get<Musee[]>(this.baseUrl + "musees");
   }
 
   // Récupérer le JSON de tous les musées dans une région
@@ -60,7 +61,7 @@ export class MuseeService {
   getMuseesByDepartement(codeDepartement: String) : Observable<any> {
     return this.http.get(this.baseUrl + "departements/" + codeDepartement + "/musees");
   }
-  
+
   // Récupérer le JSON des musées d'une ville spécifique
   getMuseesByVille(codeVille : String) : Observable<any> {
     return this.http.get(this.baseUrl + "villes/" + codeVille + "/musees");

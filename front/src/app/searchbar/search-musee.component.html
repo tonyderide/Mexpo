@@ -7,7 +7,7 @@
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
 <!--  <mat-option *ngFor="let musee of listMusee$" [value]="musee">{{musee.nomMusee}}</mat-option>-->
   <mat-option *ngFor="let option of filteredOption | async" [value]="option">
-    {{option}}
+    {{option.nomMusee}}
   </mat-option>
 </mat-autocomplete>
   <select>
