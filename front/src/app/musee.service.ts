@@ -10,7 +10,9 @@ export class MuseeService {
 
   private baseUrl = "http://localhost:8080/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   // Récupérer le JSON de toutes les régions
   getRegionList(): Observable<any> {

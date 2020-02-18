@@ -33,6 +33,7 @@ import {
   MatFormFieldModule } from "@angular/material";
 import {MatInputModule} from '@angular/material';
 import { MatAutocompleteModule } from "@angular/material/";
+import { UpdateProfilComponent } from './update-profil/update-profil.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatAutocompleteModule } from "@angular/material/";
     TableauResultatMuseeComponent,
     ImageMuseesComponent,
     ImageThemesComponent,
+    UpdateProfilComponent,
   ],
   imports: [
     BrowserModule,
