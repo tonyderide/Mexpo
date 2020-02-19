@@ -24,13 +24,13 @@ export class TableauResultatMuseeComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  @Input() codeRegionListeDeroulante: String;
-  @Input() codeDepartementListeDeroulante: String;
-  @Input() codeVilleListeDeroulante: String;
-  @Input() codeRegionCarte: String;
+  @Input() codeRegionListeDeroulante: string;
+  @Input() codeDepartementListeDeroulante: string;
+  @Input() codeVilleListeDeroulante: string;
+  @Input() codeRegionCarte: string;
   @Input() codeTheme: number;
 
-  @Output() codeMusee = new EventEmitter<String>();
+  @Output() codeMusee = new EventEmitter<string>();
 
   constructor(private museeService: MuseeService, private globals: Globals, private route: Router) { 
     this.recherche = globals.recherche;
@@ -122,19 +122,19 @@ export class TableauResultatMuseeComponent implements OnInit {
     })
   }
 
-  getMuseesByRegions(codeRegion: String) {
+  getMuseesByRegions(codeRegion: string) {
     this.museeService.getMuseesByRegion(codeRegion).subscribe((musees: Musee[]) => {
       this.setMusees(musees);
     })
   }
 
-  getMuseesByDepartements(codeDepartement: String) {
+  getMuseesByDepartements(codeDepartement: string) {
     this.museeService.getMuseesByDepartement(codeDepartement).subscribe((musees: Musee[]) => {
       this.setMusees(musees);
     })
   }
 
-  getMuseesByVilles(codeVille: String) {
+  getMuseesByVilles(codeVille: string) {
     this.museeService.getMuseesByVille(codeVille).subscribe((musees: Musee[]) => {
       this.setMusees(musees);
     })

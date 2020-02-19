@@ -12,23 +12,22 @@ export class ThemeComponent implements OnInit {
   private idTheme = 1;
   constructor(private museeService: MuseeService) { }
 
-  codeMusee: String;
+  codeMusee: string;
   codeTheme: number;
-
-  constructor() { }
 
   ngOnInit() {
     this.recupeTheme();
   }
+
   recupeTheme(): void {
-    this.museeService.getThemeById(this.idTheme)
+    this.museeService.getMuseesByTheme(this.idTheme)
       .subscribe((theme) => {
         this.theme = theme;
         console.log(this.theme);
       });
   }
 
-  onCodeMusee(st : String) {
+  onCodeMusee(st : string) {
     this.codeMusee = st;
   }
 

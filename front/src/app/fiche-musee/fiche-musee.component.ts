@@ -9,7 +9,7 @@ import { MuseeService } from '../musee.service';
 })
 export class FicheMuseeComponent implements OnInit {
 
-  @Input() codeMusee: String;
+  @Input() codeMusee: string;
 
   musee: Musee;
 
@@ -33,7 +33,7 @@ export class FicheMuseeComponent implements OnInit {
 
   // Fonctions associées au Back
 
-  getMuseesById(idMusee: String) {
+  getMuseesById(idMusee: string) {
     this.museeService.getMuseeById(idMusee).subscribe((musees: Musee) => {
       this.musee = musees;
     })

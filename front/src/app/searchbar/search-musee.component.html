@@ -1,6 +1,3 @@
-
-
-
 <div *ngIf="selectedCriteria === 'musees'" class="searchBar">
   <input [formControl]="myControl" [matAutocomplete]="auto" class="inputSearchBar"
          matInput
@@ -13,7 +10,6 @@
       {{option.nomMusee}}
     </mat-option>
   </mat-autocomplete>
-
 
   <select [(ngModel)]="selectedCriteria">c
     <option value="musees">Musées</option>

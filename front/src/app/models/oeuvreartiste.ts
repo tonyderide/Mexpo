@@ -1,9 +1,9 @@
 export class OeuvreArtiste {
-    oeuvre: String;
-    artiste: String;
-    idMusee: String;
+    oeuvre: string;
+    artiste: string;
+    idMusee: string;
 
-    constructor(oeuv: String, art: String, id: String) {
+    constructor(oeuv: string, art: string, id: string) {
         this.oeuvre = oeuv;
         this.artiste = art;
         this.idMusee = id;

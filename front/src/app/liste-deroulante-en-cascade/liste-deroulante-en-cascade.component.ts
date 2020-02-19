@@ -73,7 +73,7 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
     })
   }
 
-  getAllDepartementsByRegion(codeRegion: String) {
+  getAllDepartementsByRegion(codeRegion: string) {
     if (codeRegion !== "-1") {
       this.listDepartements=[]
       this.museeService.getDepartementsByRegion(codeRegion).subscribe((departements: Departement[]) => {
@@ -82,7 +82,7 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
     }
   }
 
-  getAllVillesByRegion(codeRegion: String) {
+  getAllVillesByRegion(codeRegion: string) {
     this.museeService.getVillesByRegion(codeRegion).subscribe((villes: Ville[]) => {
       this.listVilles = villes;
       // Trier la liste par ordre alphabétique sur le critère de nomVille
@@ -98,7 +98,7 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
     })
   }
 
-  getRegionByDepartement(codeDepartement: String) {
+  getRegionByDepartement(codeDepartement: string) {
   }
 
   // Fonctions des évènements associés

@@ -1,8 +1,8 @@
 export class Departement {
-    codeDepartement: String;
-    nomDepartement: String;
+    codeDepartement: string;
+    nomDepartement: string;
 
-    constructor(code: String, nom: String) {
+    constructor(code: string, nom: string) {
         this.codeDepartement = code;
         this.nomDepartement = nom;
     }

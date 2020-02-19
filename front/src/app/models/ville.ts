@@ -1,9 +1,9 @@
 export class Ville {
-    codeVille: String;
-    codePostal : String;
-    nomVille: String;
+    codeVille: string;
+    codePostal : string;
+    nomVille: string;
 
-    constructor(code: String, codeP: String, nom: String) {
+    constructor(code: string, codeP: string, nom: string) {
         this.codeVille = code;
         this.codePostal = codeP;
         this.nomVille = nom;

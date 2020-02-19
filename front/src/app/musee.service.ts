@@ -73,7 +73,7 @@ export class MuseeService {
   }
 
   // Récupérer le JSON d'un musée spécifique
-  getMuseeById(idMusee: string): Observable<any> {
+  getMuseeById(idMusee: String): Observable<any> {
     return this.http.get(this.baseUrl + "musees/" + idMusee);
   }
   getThemeList(): Observable<Theme[]> {

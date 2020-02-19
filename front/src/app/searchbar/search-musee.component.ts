@@ -28,8 +28,6 @@ export class SearchMuseeComponent implements OnInit {
 
   selectedCriteria = 'musees';
 
-  constructor(private museeService: MuseeService,
-              private route: Router ) {
   recherche : string = "";
   listMusees: Musee[];
   listOeuvres: OeuvreArtiste[];
@@ -43,11 +41,9 @@ export class SearchMuseeComponent implements OnInit {
   ngOnInit(): void {
     this.recupeMuseeList();
     this.recupeThemeList();
-    console.log(this.recupeMuseeList());
-    console.log(this.recupeThemeList());
     this.filteredOptionMusee();
     this.filteredOptionTheme();
-  ngOnInit(): void{}
+  }
 
   /**
    * Récupérer la valeur écrite dans la barre de recherche
@@ -141,7 +137,7 @@ export class SearchMuseeComponent implements OnInit {
   }
 
   onClick() {
-    if (this.selectedCriteria === 'musees') {this.route.navigate(['musees', this.selectedMusee.idMusee]);}
-    if (this.selectedCriteria === 'themes') {this.route.navigate(['themes', this.selectedTheme.idTheme]);}
+    if (this.selectedCriteria === 'musees') {this.router.navigate(['musees', this.selectedMusee.idMusee]);}
+    if (this.selectedCriteria === 'themes') {this.router.navigate(['themes', this.selectedTheme.idTheme]);}
   }
 }

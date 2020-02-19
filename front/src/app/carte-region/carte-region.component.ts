@@ -7,14 +7,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CarteRegionComponent implements OnInit {
 
-  @Output() codeRegionCarte = new EventEmitter<String>();
+  @Output() codeRegionCarte = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  recupererCodeRegion(valeur : String) {
+  recupererCodeRegion(valeur : string) {
     this.codeRegionCarte.emit(valeur);
   }
 

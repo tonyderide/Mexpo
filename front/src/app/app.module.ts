@@ -63,6 +63,7 @@ import { TableauOeuvreComponent } from './tableau-oeuvre/tableau-oeuvre.componen
     FicheMuseeComponent,
     ListeDeroulanteThemesComponent,
     TableauOeuvreComponent,
+    UpdateProfilComponent
   ],
   imports: [
     BrowserModule,

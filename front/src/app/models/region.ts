@@ -1,8 +1,8 @@
 export class Region {
-    codeRegion: String;
-    nomRegion: String;
+    codeRegion: string;
+    nomRegion: string;
 
-    constructor(code: String, nom: String) {
+    constructor(code: string, nom: string) {
         this.codeRegion = code;
         this.nomRegion = nom;
     }
