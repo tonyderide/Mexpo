@@ -4,12 +4,12 @@
     <h1>Connexion</h1>
 
     <label>E-mail</label>
-    <input type="text" placeholder="Entrer votre e-mail" name="e-mail" required>
+    <input type="text" placeholder="Entrer votre e-mail" name="e-mail" [(ngModel)]="user.mail" required>
 
     <label>Mot de passe</label>
-    <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+    <input type="password" placeholder="Entrer le mot de passe" name="password"  [(ngModel)]="user.mdp" required>
 
-    <button type="submit" id='submit' value='CONNEXION' >CONNEXION</button>
+    <button type="submit" id='submit' value='CONNEXION' (click)="auth.login(user.mail, user.mdp)" >CONNEXION</button>
     <a (click)="onInscription()" >créer un compte</a>
 
   </form>
@@ -43,7 +43,7 @@
     <label>Mot de passe</label>
     <input type="password" placeholder="Entrer un mot de passe" name="password"  [(ngModel)]="user.mdp" required>
 
-    <span>Votre compte a bien était créer</span>
+    <span *ngIf="success === true" (click)="inscription()">Votre compte a bien été créé</span>
 
     <button type="submit" id='submit' value='INSCRIPTION'>INSCRIPTION</button>
 

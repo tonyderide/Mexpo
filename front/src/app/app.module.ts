@@ -35,6 +35,7 @@ import {
   MatFormFieldModule } from "@angular/material";
 import {MatInputModule} from '@angular/material';
 import { MatAutocompleteModule } from "@angular/material/";
+import { UpdateProfilComponent } from './update-profil/update-profil.component';
 
 import { Globals } from './global';
 import { FicheMuseeComponent } from './fiche-musee/fiche-musee.component';

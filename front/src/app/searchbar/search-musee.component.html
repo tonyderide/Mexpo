@@ -1,23 +1,56 @@
 
-<div class="searchBar">
-<!--<mat-form-field>-->
-  <input type="text" placeholder="Recherche" class="inputSearchBar" matInput
-         [formControl]="myControl"
-         [matAutocomplete]="auto" >
-<!--</mat-form-field>-->
 
-<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-  <mat-option *ngFor="let musee of listMusee$" [value]="musee">{{musee.nomMusee}}</mat-option>
-</mat-autocomplete>
-  <select>
-    <option value="">--Options--</option>
+
+<div *ngIf="selectedCriteria === 'musees'" class="searchBar">
+  <input [formControl]="myControl" [matAutocomplete]="auto" class="inputSearchBar"
+         matInput
+         placeholder="Recherche de musée"
+         type="text">
+  <mat-autocomplete #auto="matAutocomplete"
+                    (optionSelected)='getSelectedMusee($event.option.value)'
+                    [displayWith]="displayFn">
+    <mat-option *ngFor="let option of filteredOption | async" [value]="option" id="selectedMusee">
+      {{option.nomMusee}}
+    </mat-option>
+  </mat-autocomplete>
+
+
+  <select [(ngModel)]="selectedCriteria">c
     <option value="musees">Musées</option>
-    <option value="expositions">Expositions</option>
-    <option value="localisation">Localisation</option>
+<!--    <option value="expositions">Expositions</option>-->
+<!--    <option value="localisation">Localisation</option>-->
     <option value="themes">Thèmes</option>
-    <option value="artistes">Artistes</option>
-    <option value="oeuvres">Oeuvres</option>
+<!--    <option value="artistes">Artistes</option>-->
+<!--    <option value="oeuvres">Oeuvres</option>-->
   </select>
 
-  <div class="searchBttn"><i class="material-icons">search</i></div>
+  <div (click)="onClick()" class="searchBttn"><i class="material-icons">search</i></div>
 </div>
+
+<div *ngIf="selectedCriteria === 'themes'" class="searchBar">
+  <input [formControl]="myControltheme" [matAutocomplete]="autotheme" class="inputSearchBar"
+         matInput
+         placeholder="Recherche de thèmes"
+         type="text">
+  <mat-autocomplete #autotheme="matAutocomplete"
+                    (optionSelected)='getSelectedTheme($event.option.value)'
+                    [displayWith]="displayFnTheme">
+    <mat-option *ngFor="let option of filteredOptionT | async" [value]="option" id="selectedTheme">
+      {{option.nomTheme}}
+    </mat-option>
+  </mat-autocomplete>
+
+
+
+  <select [(ngModel)]="selectedCriteria">
+    <option value="musees">Musées</option>
+<!--    <option value="expositions">Expositions</option>-->
+<!--    <option value="localisation">Localisation</option>-->
+    <option value="themes">Thèmes</option>
+<!--    <option value="artistes">Artistes</option>-->
+<!--    <option value="oeuvres">Oeuvres</option>-->
+  </select>
+
+  <div (click)="onClick()" class="searchBttn"><i class="material-icons">search</i></div>
+</div>
+

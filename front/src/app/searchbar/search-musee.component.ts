@@ -1,21 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Musee} from '../models/musee';
+import {MuseeService} from '../musee.service';
+import {FormControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {Theme} from '../models/theme';
 import { Observable, Subject } from "rxjs";
 import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
-import { Musee} from '../models/musee'
-import { MuseeService } from "../musee.service";
-import {FormControl} from "@angular/forms";
 import { Globals } from '../global';
-import { Router } from '@angular/router';
 import { OeuvreArtiste } from '../models/oeuvreartiste';
 
 @Component({
   selector: 'app-search-musee',
   templateUrl: './search-musee.component.html',
-  styleUrls: ['./search-musee.component.scss']
+  styleUrls: ['./search-musee.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SearchMuseeComponent implements OnInit {
+  myControl = new FormControl();
+  myControltheme = new FormControl();
+  listMusee: Musee[] = [];
+  listTheme: Theme[] = [];
+  filteredOption: Observable<Musee[]>;
+  filteredOptionT: Observable<Theme[]>;
+  selectedMusee: Musee;
+  selectedTheme: Theme;
 
+  selectedCriteria = 'musees';
+
+  constructor(private museeService: MuseeService,
+              private route: Router ) {
   recherche : string = "";
   listMusees: Musee[];
   listOeuvres: OeuvreArtiste[];
@@ -26,6 +40,13 @@ export class SearchMuseeComponent implements OnInit {
     this.listOeuvres = globals.listeOeuvreRecherche;
   }
 
+  ngOnInit(): void {
+    this.recupeMuseeList();
+    this.recupeThemeList();
+    console.log(this.recupeMuseeList());
+    console.log(this.recupeThemeList());
+    this.filteredOptionMusee();
+    this.filteredOptionTheme();
   ngOnInit(): void{}
 
   /**
@@ -36,7 +57,23 @@ export class SearchMuseeComponent implements OnInit {
     // this.getMuseesByRechercheMusee(this.recherche);
     this.globals.recherche = this.recherche;
   }
+  filteredOptionMusee() {
+    this.filteredOption = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.nomMusee),
+        map(nomMusee => nomMusee ? this._filter(nomMusee) : this.listMusee.slice())
+      );
+  }
 
+  filteredOptionTheme() {
+    this.filteredOptionT = this.myControltheme.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.nomTheme),
+        map(nomTheme => nomTheme ? this._filtertheme(nomTheme) : this.listTheme.slice())
+      );
+  }
   /**
    * Récupérer la liste des musées correspondant aux critères de la recherche par "Musées" à partir de l'API externe
    * @param rechercheMusee 
@@ -50,6 +87,10 @@ export class SearchMuseeComponent implements OnInit {
     })
   }
 
+  recupeMuseeList() {
+    return this.museeService.getMuseesList()
+      .subscribe((musee) => {this.listMusee = musee; });
+  }
   getOeuvresByRechercheOeuvre(rechercheMusee: string) {
      this.museeService.getOeuvreByRecherche(rechercheMusee).subscribe((oeuvres: OeuvreArtiste[]) => {
        this.listOeuvres = oeuvres;
@@ -58,93 +99,49 @@ export class SearchMuseeComponent implements OnInit {
      })
   }
 
+  recupeThemeList() {
+    return this.museeService.getThemeList()
+      .subscribe((theme) => {this.listTheme = theme; console.log(theme); });
+  }
 
+  displayFn(musee: Musee): string {
+    return musee && musee.nomMusee ? musee.nomMusee : '';
+  }
 
-  
+  displayFnTheme(theme: Theme): string {
+    return theme && theme.nomTheme ? theme.nomTheme : '';
+  }
 
+  private _filter(name: string): Musee[] {
+    const filterValue = name;
+    return this.listMusee.filter(option => {
+      if (option.nomMusee) {
+        return option.nomMusee.toLowerCase().startsWith(filterValue);
+      }
+      // option.nomMusee/*.toLowerCase()*/.indexOf(filterValue) === 0
+    });
+  }
+
+  private _filtertheme(name: string): Theme[] {
+    const filterValue = name;
+    return this.listTheme.filter(option => {
+      if (option.nomTheme) {
+        return option.nomTheme.toLowerCase().startsWith(filterValue);
+      }
+      // option.nomMusee/*.toLowerCase()*/.indexOf(filterValue) === 0
+    });
+  }
+
+  getSelectedMusee(selectedMusee: Musee) {
+    this.selectedMusee = selectedMusee;
+  }
+
+  getSelectedTheme(selectedTheme: Theme) {
+    this.selectedTheme = selectedTheme;
+  }
+
+  onClick() {
+    if (this.selectedCriteria === 'musees') {this.route.navigate(['musees', this.selectedMusee.idMusee]);}
+    if (this.selectedCriteria === 'themes') {this.route.navigate(['themes', this.selectedTheme.idTheme]);}
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// @Component({
-//   selector: 'app-search-musee',
-//   templateUrl: './search-musee.component.html',
-//   styleUrls: ['./search-musee.component.scss']
-// })
-
-// export class SearchMuseeComponent implements OnInit {
-//      listMusee$: Musee[];
-//      private searchTerms = new Subject<string>();
-//      myControl: FormControl = new FormControl();
-//      //filteredOption : Observable<string[]>;
-//      displayFn(subject){ return subject ? subject.nomMusee : undefined; }
-
-//   constructor(private museeService: MuseeService) {
-//   }
-
-//   ngOnInit(): void{
-//     this.recupeMuseeList();
-//     // this.filteredOption = this.myControl.valueChanges.pipe(
-//     //     startWith(''),
-//     //     map(val => this.filter(val))
-//     //   );
-//     // console.log(this.filteredOption);
-//   }
-//   // filter(val: string): string[]{
-//   //   return this.listMusee$.map(musee => musee.nomMusee).filter(option =>
-//   //   option.toLowerCase().includes(val.toLowerCase()));
-//   // }
-
-//   recupeMuseeList(): void {
-//     this.museeService.getMuseesList()
-//       .subscribe((musee$: any) => {
-//         this.listMusee$ = musee$;
-//         console.log(this.listMusee$);
-//       });
-//   };
-
-
-// }
-
-
-
-
-
-
-// ngOnInit(): void {
-//   // console.log(this.museeService.getMuseesList());
-
-//   this.listMusee$= this.searchTerms.pipe(
-//     debounceTime(300),
-//     distinctUntilChanged(),
-//     switchMap((term:string) => this.museeService.getMuseeById(term))
-//     );
-//   console.log(this.listMusee$);
-// }
-// displayfonction(subject){
-//   return subject ? subject : undefined;
-// }
-
-// }
-// search(term):void {
-//   this.searchTerms.next(term);
-//   console.log(term);
-// }
-

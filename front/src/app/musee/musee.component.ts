@@ -10,14 +10,23 @@ export class MuseeComponent implements OnInit {
 
   codeMusee: String;
 
+
   constructor(private museeService: MuseeService) {
   }
 
   ngOnInit() {
+    this.recupeMusee();
+
   }
 
   onCodeMusee(st : String) {
     this.codeMusee = st;
+  recupeMusee(): void {
+    this.museeService.getMuseeById(this.idMusee)
+      .subscribe((musee) => {
+        this.musee = musee;
+        console.log(this.musee);
+      });
   }
 
 }
