@@ -1,6 +1,6 @@
 <header class="navbar">
-  <img src="https://zupimages.net/up/20/07/ot27.png">
-  <nav [className]="activeMenu ? 'active' : 'inactive'">
+  <img src="https://zupimages.net/up/20/07/ot27.png" alt="logo du site">
+  <nav (click)="onClick()" [className]="activeMenu ? 'active' : 'inactive'" >
     <ul>
       <li><a routerLink="/accueil" class="nav-link" routerLinkActive="active">Accueil</a></li>
       <li><a routerLink="/musees" class="nav-link" routerLinkActive="active">Musées</a></li>

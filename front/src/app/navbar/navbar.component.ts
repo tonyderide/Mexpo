@@ -12,11 +12,16 @@ export class NavbarComponent implements OnInit{
   activeMenu: boolean = false;
 
   constructor(private auth : AuthentificationService) {}
-  
+
   ngOnInit() {}
 
   handleClickMenu(){
     this.activeMenu = !this.activeMenu;
+  }
+
+
+  onClick() {
+    this.activeMenu = false;
   }
 
 }

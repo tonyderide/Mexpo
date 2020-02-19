@@ -91,6 +91,7 @@ export class SearchMuseeComponent implements OnInit {
     return this.museeService.getMuseesList()
       .subscribe((musee) => {this.listMusee = musee; });
   }
+  
   getOeuvresByRechercheOeuvre(rechercheMusee: string) {
      this.museeService.getOeuvreByRecherche(rechercheMusee).subscribe((oeuvres: OeuvreArtiste[]) => {
        this.listOeuvres = oeuvres;

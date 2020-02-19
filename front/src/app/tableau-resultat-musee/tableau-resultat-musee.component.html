@@ -29,7 +29,7 @@
 
     <ng-container matColumnDef="Reservation">
       <th mat-header-cell *matHeaderCellDef> Réservation </th>
-      <td mat-cell *matCellDef="let musee"><a href="{{musee.siteWeb}}"><i class="material-icons">add_shopping_cart</i></a></td>
+      <td mat-cell *matCellDef="let musee"><a href="{{musee.siteWeb}}" target="_blank"><i class="material-icons">add_shopping_cart</i></a></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

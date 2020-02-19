@@ -31,4 +31,6 @@
 .blocMusee {
   flex:1;
   align-self: center;
+  padding-top: 10px;
+  padding-left: 20px;
 }
