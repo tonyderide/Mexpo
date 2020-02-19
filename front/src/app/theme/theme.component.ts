@@ -13,7 +13,7 @@ export class ThemeComponent implements OnInit {
   constructor(private museeService: MuseeService) { }
 
   codeMusee: string;
-  codeTheme: number;
+  codeTheme: number = -1;
 
   ngOnInit() {
     this.recupeTheme();

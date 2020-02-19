@@ -54,7 +54,7 @@ export class AuthentificationService {
 
 
   login(mail, mdp) {
-    this.http.get(`${this.baseUrl}/users/login?mail=${mail}&mdp=${mdp}`).subscribe(
+    this.http.get(`${this.baseUrl}users/login?mail=${mail}&mdp=${mdp}`).subscribe(
       (user : User) => {
         if (user !== null) {
           sessionStorage.setItem('idUser', String(+user.idUser));

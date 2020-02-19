@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MuseeService} from '../musee.service';
+import { MuseeService } from '../musee.service';
 import { Musee } from '../models/musee';
 
 @Component({
@@ -20,16 +20,17 @@ export class MuseeComponent implements OnInit {
 
   }
 
-  onCodeMusee(st : string) {
+  onCodeMusee(st: string) {
     this.codeMusee = st;
   }
 
   recupeMusee(): void {
-    this.museeService.getMuseeById(this.codeMusee)
-      .subscribe((musee) => {
-        this.musee = musee;
-        console.log(this.musee);
-      });
+    if (this.codeMusee)
+      this.museeService.getMuseeById(this.codeMusee)
+        .subscribe((musee) => {
+          this.musee = musee;
+          console.log(this.musee);
+        });
   }
 
 }

@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Musee } from '../models/musee';
 import { MuseeService } from '../musee.service';
 import { Globals } from '../global';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tableau-resultat-musee',
@@ -32,19 +32,22 @@ export class TableauResultatMuseeComponent implements OnInit {
 
   @Output() codeMusee = new EventEmitter<string>();
 
-  constructor(private museeService: MuseeService, private globals: Globals, private route: Router) { 
+  constructor(private museeService: MuseeService, private globals: Globals, private route: Router, private router: ActivatedRoute) { 
     this.recherche = globals.recherche;
     this.listMusees = globals.listeMuseeRecherche;
+
   }
 
-  ngOnInit() {
-    if (this.recherche !== "") {
-      this.setMusees(this.listMusees);
+  ngOnInit() {    
+    this.recupererIdURL();
+    
+    if (this.codeTheme && this.codeTheme !== -1) {
+      this.getMuseesByThemes(this.codeTheme);
     } else {
       this.getAllMusees();
     }
 
-    this.globals.recherche="";
+    this.codeTheme = -1;
   }
 
   /**
@@ -105,8 +108,6 @@ export class TableauResultatMuseeComponent implements OnInit {
       if (propName === 'codeTheme') {
         let idTheme = changes[propName].currentValue;
 
-        console.log(idTheme);
-
         if (idTheme !== '-1') {
           this.getMuseesByThemes(idTheme);
         }
@@ -140,8 +141,8 @@ export class TableauResultatMuseeComponent implements OnInit {
     })
   }
 
-  getMuseesByThemes(codeTheme: number) {
-    this.museeService.getMuseesByTheme(codeTheme).subscribe((liste1) => {
+  getMuseesByThemes(codeTheme: number) {    
+    this.museeService.getMuseesByTheme(codeTheme).subscribe((liste1) => {      
       this.listMusees = liste1.musees;
       this.setMusees(this.listMusees);
     })
@@ -166,4 +167,7 @@ export class TableauResultatMuseeComponent implements OnInit {
     this.codeMusee.emit(st);
   }
 
+  recupererIdURL() {    
+    this.codeTheme = parseInt(this.router.snapshot.paramMap.get('idTheme'));
+  }
 }

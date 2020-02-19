@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 import { Musee } from '../models/musee';
 import { MuseeService } from '../musee.service';
+import { Router, ParamMap, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fiche-musee',
@@ -10,13 +13,21 @@ import { MuseeService } from '../musee.service';
 export class FicheMuseeComponent implements OnInit {
 
   @Input() codeMusee: string;
+  
+  codeTheme: number;
 
   musee: Musee;
 
-  constructor(private museeService: MuseeService) { }
+  museeRecherche: Observable<Musee>;
+
+  constructor(private museeService: MuseeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.getMuseesById('M0001');
+    if (this.codeMusee !== "") {
+      this.recupererIdURL();
+      this.getMuseesById(this.codeMusee);
+    }
+
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
@@ -38,4 +49,9 @@ export class FicheMuseeComponent implements OnInit {
       this.musee = musees;
     })
   }
+
+  recupererIdURL() {
+    this.codeMusee = this.route.snapshot.paramMap.get('idMusee');
+  }
+
 }
