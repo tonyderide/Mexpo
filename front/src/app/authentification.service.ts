@@ -25,12 +25,20 @@ export class AuthentificationService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
+  /**
+   * Ajoute un utilisateur en BDD
+   * @param user
+   */
   postAddUser(user: User): Observable<any> {
     console.log(user);
     return this.http.post<User>(this.baseUrl + 'users/add', user);
   }
 
 
+  /** MAj un User en BDD
+   *  Le déconnecte et le reconnecte pour mettre a jour son profil, renvoie l'user a l'accueil
+   * @param majUser
+   */
   updateUser(majUser :User): Observable<any> {
     this.logout();
     setTimeout(
@@ -44,7 +52,10 @@ export class AuthentificationService {
   }
 
 
-
+  /** Suprimme un User de la BDD
+   *  Vide les informations du sS et renvoie l'user a l'accueil.
+   * @param idUser
+   */
   deleteUser(idUser){
     idUser = Number(sessionStorage.getItem('idUser'));
     this.http.delete(this.baseUrl+'users/delete/'+ idUser).subscribe();
@@ -53,6 +64,11 @@ export class AuthentificationService {
   }
 
 
+  /** Connecte un User, grâce a son mail et mdp.
+   *  récupère les infos en BDD de l'User, les créer dans le sS et récupère ces même info du sS et renvoie l'user sur l'accueil.
+   * @param mail
+   * @param mdp
+   */
   login(mail, mdp) {
     this.http.get(`${this.baseUrl}users/login?mail=${mail}&mdp=${mdp}`).subscribe(
       (user : User) => {
@@ -76,7 +92,6 @@ export class AuthentificationService {
               this.ville = sessionStorage.getItem('ville');
               this.codePostal = sessionStorage.getItem('codePostal');
               this.mdp = sessionStorage.getItem('mdp');
-
               this.router.navigate(['accueil'])
             }, 100
           );
@@ -87,7 +102,9 @@ export class AuthentificationService {
   }
 
 
-
+  /** Permet de déconnecté l'user
+   *  En vidant ses infos du sS.
+   */
   logout() {
       sessionStorage.removeItem('isUser');
       sessionStorage.removeItem('nom');
@@ -100,6 +117,9 @@ export class AuthentificationService {
       this.router.navigate(['accueil'])
   }
 
+  /**
+   * Vérifie si un User est connecté.
+   */
   isLoggedIn() {
     const idUser = sessionStorage.getItem('idUser');
     const nomUser = sessionStorage.getItem('nom');
