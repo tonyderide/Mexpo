@@ -1,30 +1,44 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Observable, Subject, Subscription} from 'rxjs';
-import {filter, map, startWith} from 'rxjs/operators';
-import { Musee } from '../models/musee'
-import { MuseeService } from '../musee.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {Musee} from '../models/musee';
+import {MuseeService} from '../musee.service';
 import {FormControl} from '@angular/forms';
-import { options } from '../searchbar/listNomMusee'
+import {Router} from '@angular/router';
+import {Theme} from '../models/theme';
 
 @Component({
   selector: 'app-search-musee',
   templateUrl: './search-musee.component.html',
-  styleUrls: ['./search-musee.component.scss']
+  styleUrls: ['./search-musee.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SearchMuseeComponent implements OnInit {
   myControl = new FormControl();
+  myControltheme = new FormControl();
   listMusee: Musee[] = [];
-  listNomMusee = options;
+  listTheme: Theme[] = [];
   filteredOption: Observable<Musee[]>;
-  // displayFn(subject) {return subject ? subject.nomMusee : subject; }
+  filteredOptionT: Observable<Theme[]>;
+  selectedMusee: Musee;
+  selectedTheme: Theme;
 
-  constructor(private museeService: MuseeService) {
+  selectedCriteria = 'musees';
+
+  constructor(private museeService: MuseeService,
+              private route: Router ) {
   }
 
   ngOnInit(): void {
     this.recupeMuseeList();
-    console.log(this.recupeMuseeList())
+    this.recupeThemeList();
+    console.log(this.recupeMuseeList());
+    console.log(this.recupeThemeList());
+    this.filteredOptionMusee();
+    this.filteredOptionTheme();
+  }
+  filteredOptionMusee() {
     this.filteredOption = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -33,38 +47,63 @@ export class SearchMuseeComponent implements OnInit {
       );
   }
 
+  filteredOptionTheme() {
+    this.filteredOptionT = this.myControltheme.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.nomTheme),
+        map(nomTheme => nomTheme ? this._filtertheme(nomTheme) : this.listTheme.slice())
+      );
+  }
+
+  recupeMuseeList() {
+    return this.museeService.getMuseesList()
+      .subscribe((musee) => {this.listMusee = musee; });
+  }
+
+  recupeThemeList() {
+    return this.museeService.getThemeList()
+      .subscribe((theme) => {this.listTheme = theme; console.log(theme); });
+  }
+
   displayFn(musee: Musee): string {
     return musee && musee.nomMusee ? musee.nomMusee : '';
   }
 
+  displayFnTheme(theme: Theme): string {
+    return theme && theme.nomTheme ? theme.nomTheme : '';
+  }
+
   private _filter(name: string): Musee[] {
     const filterValue = name;
-    return this.listMusee.filter(option => option.nomMusee/*.toLowerCase()*/.indexOf(filterValue) === 0);
+    return this.listMusee.filter(option => {
+      if (option.nomMusee) {
+        return option.nomMusee.toLowerCase().startsWith(filterValue);
+      }
+      // option.nomMusee/*.toLowerCase()*/.indexOf(filterValue) === 0
+    });
   }
 
+  private _filtertheme(name: string): Theme[] {
+    const filterValue = name;
+    return this.listTheme.filter(option => {
+      if (option.nomTheme) {
+        return option.nomTheme.toLowerCase().startsWith(filterValue);
+      }
+      // option.nomMusee/*.toLowerCase()*/.indexOf(filterValue) === 0
+    });
+  }
 
-  recupeMuseeList() {
-    return this.museeService.getMuseesList()
-      .subscribe((musee$) => {this.listMusee = musee$; });
+  getSelectedMusee(selectedMusee: Musee) {
+    this.selectedMusee = selectedMusee;
+  }
+
+  getSelectedTheme(selectedTheme: Theme) {
+    this.selectedTheme = selectedTheme;
+  }
+
+  onClick() {
+    if (this.selectedCriteria === 'musees') {this.route.navigate(['musees', this.selectedMusee.idMusee]);}
+    if (this.selectedCriteria === 'themes') {this.route.navigate(['themes', this.selectedTheme.idTheme]);}
   }
 }
-// ngOnInit(): void {
-//   // console.log(this.museeService.getMuseesList());
-
-//   this.listMusee$= this.searchTerms.pipe(
-//     debounceTime(300),
-//     distinctUntilChanged(),
-//     switchMap((term:string) => this.museeService.getMuseeById(term))
-//     );
-//   console.log(this.listMusee$);
-// }
-// displayfonction(subject){
-//   return subject ? subject : undefined;
-// }
-
-// }
-// search(term):void {
-//   this.searchTerms.next(term);
-//   console.log(term);
-// }
-

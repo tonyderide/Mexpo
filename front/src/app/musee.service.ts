@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Musee} from './models/musee';
+import {Theme} from './models/theme';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +12,7 @@ import {Musee} from './models/musee';
 export class MuseeService {
 
   private baseUrl = "http://localhost:8080/";
+
 
   constructor(private http: HttpClient) { }
 
@@ -58,18 +62,24 @@ export class MuseeService {
   }
 
   // Récupérer le JSON de tous les musées dans un département
-  getMuseesByDepartement(codeDepartement: String) : Observable<any> {
+  getMuseesByDepartement(codeDepartement: String): Observable<any> {
     return this.http.get(this.baseUrl + "departements/" + codeDepartement + "/musees");
   }
 
   // Récupérer le JSON des musées d'une ville spécifique
-  getMuseesByVille(codeVille : String) : Observable<any> {
+  getMuseesByVille(codeVille: String): Observable<any> {
     return this.http.get(this.baseUrl + "villes/" + codeVille + "/musees");
   }
 
   // Récupérer le JSON d'un musée spécifique
-  getMuseeById(idMusee : String) : Observable<any> {
+  getMuseeById(idMusee: string): Observable<any> {
     return this.http.get(this.baseUrl + "musees/" + idMusee);
   }
+  getThemeList(): Observable<Theme[]> {
+    return this.http.get<Theme[]>(this.baseUrl + "themes");
+  }
 
+  getThemeById(idTheme: number): Observable<Theme>{
+    return this.http.get<Theme>(this.baseUrl + "themes/" + idTheme + "/musees");
+  }
 }

@@ -12,19 +12,20 @@ export class MuseeComponent implements OnInit {
   musee = Musee;
   idMusee = 'M0002';
 
+
   constructor(private museeService: MuseeService) {
   }
 
   ngOnInit() {
-    this.recupeMusee()
+    this.recupeMusee();
 
   }
 
   recupeMusee(): void {
-    this.museeService.getMuseeById('idMusee')
-      .subscribe((musee)=>{
-        this.musee=musee;
-        console.log(musee);
+    this.museeService.getMuseeById(this.idMusee)
+      .subscribe((musee) => {
+        this.musee = musee;
+        console.log(this.musee);
       });
   }
 }

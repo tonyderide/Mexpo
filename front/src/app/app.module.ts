@@ -33,6 +33,7 @@ import {
   MatFormFieldModule } from "@angular/material";
 import {MatInputModule} from '@angular/material';
 import { MatAutocompleteModule } from "@angular/material/";
+import { FicheMuseeComponent } from './fiche-musee/fiche-musee.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatAutocompleteModule } from "@angular/material/";
     TableauResultatMuseeComponent,
     ImageMuseesComponent,
     ImageThemesComponent,
+    FicheMuseeComponent,
   ],
   imports: [
     BrowserModule,
