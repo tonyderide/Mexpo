@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'themes/:idTheme', component: ThemeComponent},
   { path: 'oeuvres', component: OeuvreComponent},
   { path: 'expositions', component: ExpositionComponent},
-  { path: 'update' , component: UpdateProfilComponent}
+  { path: 'update' , component: UpdateProfilComponent},
+  { path: 'oeuvres/:rechercheNomOeuvre', component: OeuvreComponent}
 ];
 
 @NgModule({

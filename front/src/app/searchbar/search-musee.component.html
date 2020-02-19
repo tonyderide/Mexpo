@@ -17,7 +17,7 @@
 <!--    <option value="localisation">Localisation</option>-->
     <option value="themes">Thèmes</option>
 <!--    <option value="artistes">Artistes</option>-->
-<!--    <option value="oeuvres">Oeuvres</option>-->
+    <option value="oeuvres">Oeuvres</option>
   </select>
 
   <div (click)="onClick()" class="searchBttn"><i class="material-icons">search</i></div>
@@ -44,9 +44,25 @@
 <!--    <option value="localisation">Localisation</option>-->
     <option value="themes">Thèmes</option>
 <!--    <option value="artistes">Artistes</option>-->
-<!--    <option value="oeuvres">Oeuvres</option>-->
+    <option value="oeuvres">Oeuvres</option>
   </select>
 
   <div (click)="onClick()" class="searchBttn"><i class="material-icons">search</i></div>
 </div>
 
+<div *ngIf="selectedCriteria === 'oeuvres'" class="searchBar">
+  <input [(ngModel)]="rechercheNomOeuvre" class="inputSearchBar"
+         placeholder="Recherche d'Oeuvre"
+         type="text">
+
+  <select [(ngModel)]="selectedCriteria">c
+    <option value="musees">Musées</option>
+    <!--    <option value="expositions">Expositions</option>-->
+    <!--    <option value="localisation">Localisation</option>-->
+    <option value="themes">Thèmes</option>
+<!--        <option value="artistes">Artistes</option>-->
+    <option value="oeuvres">Oeuvres</option>
+  </select>
+
+  <div (click)="onClick()" class="searchBttn"><i class="material-icons">search</i></div>
+</div>

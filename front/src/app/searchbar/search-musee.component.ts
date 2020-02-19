@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {Musee} from '../models/musee';
 import {MuseeService} from '../musee.service';
 import {FormControl} from '@angular/forms';
@@ -25,10 +25,12 @@ export class SearchMuseeComponent implements OnInit {
   filteredOptionT: Observable<Theme[]>;
   selectedMusee: Musee;
   selectedTheme: Theme;
+  rechercheNomOeuvre: string;
+
 
   selectedCriteria = 'musees';
 
-  recherche : string = "";
+  recherche: string = '';
   listMusees: Musee[];
   listOeuvres: OeuvreArtiste[];
 
@@ -36,6 +38,7 @@ export class SearchMuseeComponent implements OnInit {
     this.recherche = globals.recherche;
     this.listMusees = globals.listeMuseeRecherche;
     this.listOeuvres = globals.listeOeuvreRecherche;
+    this.rechercheNomOeuvre = globals.rechercheNomOeuvre;
   }
 
   ngOnInit(): void {
@@ -43,6 +46,7 @@ export class SearchMuseeComponent implements OnInit {
     this.recupeThemeList();
     this.filteredOptionMusee();
     this.filteredOptionTheme();
+
   }
 
   /**
@@ -72,7 +76,7 @@ export class SearchMuseeComponent implements OnInit {
   }
   /**
    * Récupérer la liste des musées correspondant aux critères de la recherche par "Musées" à partir de l'API externe
-   * @param rechercheMusee 
+   * @param rechercheMusee
    */
   getMuseesByRechercheMusee(rechercheMusee : string) {
     this.museeService.getMuseeByRecherche(rechercheMusee).subscribe((musees: Musee[]) => {
@@ -137,7 +141,9 @@ export class SearchMuseeComponent implements OnInit {
   }
 
   onClick() {
-    if (this.selectedCriteria === 'musees') {this.router.navigate(['musees', this.selectedMusee.idMusee]);}
-    if (this.selectedCriteria === 'themes') {this.router.navigate(['themes', this.selectedTheme.idTheme]);}
+    if (this.selectedCriteria === 'musees') {this.router.navigate(['musees', this.selectedMusee.idMusee]); }
+    if (this.selectedCriteria === 'themes') {this.router.navigate(['themes', this.selectedTheme.idTheme]); }
+    if (this.selectedCriteria === 'oeuvres') {this.router.navigate(['oeuvres', this.rechercheNomOeuvre]); }
   }
+
 }

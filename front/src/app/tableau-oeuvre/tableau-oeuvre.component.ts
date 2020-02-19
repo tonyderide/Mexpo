@@ -12,6 +12,7 @@ import { OeuvreMusee } from '../models/oeuvremusee';
   templateUrl: './tableau-oeuvre.component.html',
   styleUrls: ['./tableau-oeuvre.component.css']
 })
+
 export class TableauOeuvreComponent implements OnInit {
 
   displayedColumns: string[] = ['Oeuvre', 'Ville', 'N°', 'Musée', 'Ville', 'Reservation'];
@@ -30,10 +31,10 @@ export class TableauOeuvreComponent implements OnInit {
 
   ngOnInit() {
     if (this.recherche !== "") {
-      
+
       this.recupererMusee(this.listOeuvres);
       // this.setMusees(this.listOeuvresMusee);
-      
+
     }
 
     this.globals.recherche="";
@@ -41,11 +42,11 @@ export class TableauOeuvreComponent implements OnInit {
 
   recupererMusee(lstOeuvres : OeuvreArtiste[]) {
     lstOeuvres.forEach(oeuvreArtiste => {
-      
+
       this.getMuseeById(oeuvreArtiste.idMusee);
 
       console.log(this.musee);
-    
+
       let oeuvremusee = new OeuvreMusee(oeuvreArtiste.oeuvre, oeuvreArtiste.artiste, oeuvreArtiste.idMusee, this.musee.nomMusee, this.musee.ville, this.musee.siteWeb);
 
       // this.listOeuvresMusee.push(oeuvremusee);
@@ -68,7 +69,7 @@ export class TableauOeuvreComponent implements OnInit {
     this.listOeuvresMusee = lstOeuvresMusee;
     this.setDataSourceTab();
   }
-  
+
   setDataSourceTab() {
     this.dataSource = new MatTableDataSource<OeuvreMusee>(this.listOeuvresMusee);
     this.dataSource.paginator = this.paginator;

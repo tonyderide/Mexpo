@@ -44,7 +44,7 @@ export class AuthentificationService {
     setTimeout(
       () => {
         this.login(majUser.mail, majUser.mdp)
-        this.router.navigate(['accueil'])
+        this.router.navigate(['accueil']);
       }, 1
     );
 
