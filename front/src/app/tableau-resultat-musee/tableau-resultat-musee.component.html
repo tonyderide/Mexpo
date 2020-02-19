@@ -4,6 +4,7 @@
     (codeDepartementListeDeroulante)="getCodeDepartementListeDeroulante($event)"
     (codeVilleListeDeroulante)="getCodeVilleListeDeroulante($event)"
     (codeRegionCarte)="getCodeRegionCarte($event)"
+    (codeTheme)="getCOdeTheme($event)"
   >
 
     <ng-container matColumnDef="N°">
@@ -11,14 +12,19 @@
         <td mat-cell *matCellDef="let musee"> {{musee.idMusee}} </td>
       </ng-container>
     
+    <!-- <ng-container matColumnDef="Favori">
+      <th mat-header-cell *matHeaderCellDef> Favori </th>
+      <td mat-cell *matCellDef="let musee"><i class="material-icons">star_border</i></td>
+    </ng-container> -->
+
     <ng-container matColumnDef="Musée">
       <th mat-header-cell *matHeaderCellDef> Musée </th>
-      <td mat-cell *matCellDef="let musee"> {{musee.nomMusee}} </td>
+      <td mat-cell *matCellDef="let musee" (click)="onClick(musee.idMusee)">{{musee.nomMusee}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="Adresse">
-      <th mat-header-cell *matHeaderCellDef> Adresse </th>
-      <td mat-cell *matCellDef="let musee"> {{musee.adresse}} </td>
+    <ng-container matColumnDef="Ville">
+      <th mat-header-cell *matHeaderCellDef> Ville </th>
+      <td mat-cell *matCellDef="let musee"> {{musee.ville}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Reservation">

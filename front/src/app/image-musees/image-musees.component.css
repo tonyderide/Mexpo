@@ -1,8 +1,4 @@
-body {
-	margin: 0;
-	overflow: hidden;
-}
-
-canvas {
-	background-image: radial-gradient(#666, #333);
+.carrouselMusee {
+    width: 310px;
+    padding-right: 10px;
 }

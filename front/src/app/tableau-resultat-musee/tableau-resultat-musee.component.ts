@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, Input, SimpleChange } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Musee } from '../models/musee';
 import { MuseeService } from '../musee.service';
+import { Globals } from '../global';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tableau-resultat-musee',
@@ -11,9 +13,14 @@ import { MuseeService } from '../musee.service';
 })
 export class TableauResultatMuseeComponent implements OnInit {
 
-  displayedColumns: string[] = ['N°', 'Musée', 'Adresse', 'Reservation'];
+  displayedColumns: string[] = ['N°', 'Musée', 'Ville', 'Reservation'];
   listMusees: Musee[];
   dataSource: MatTableDataSource<Musee>;
+  recherche: string;
+  
+  liste1: [] = [];
+
+  musee: Musee;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -21,15 +28,36 @@ export class TableauResultatMuseeComponent implements OnInit {
   @Input() codeDepartementListeDeroulante: String;
   @Input() codeVilleListeDeroulante: String;
   @Input() codeRegionCarte: String;
+  @Input() codeTheme: number;
 
-  constructor(private museeService: MuseeService) { }
+  @Output() codeMusee = new EventEmitter<String>();
 
-  ngOnInit() {
-    this.getAllMusees();
+  constructor(private museeService: MuseeService, private globals: Globals, private route: Router) { 
+    this.recherche = globals.recherche;
+    this.listMusees = globals.listeMuseeRecherche;
   }
 
-  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+  ngOnInit() {
+    if (this.recherche !== "") {
+      this.setMusees(this.listMusees);
+    } else {
+      this.getAllMusees();
+    }
 
+    this.globals.recherche="";
+  }
+
+  /**
+   * ATTENTION
+   */
+  // ngDoCheck() {
+  //   // CHECK CHANGEMENT VALEUR RECHERCHE
+  //   console.log(this.globals.listeMuseeRecherche.length === this.listMusees.length);
+    
+  // }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    
     for (let propName in changes) {
 
       if (propName === 'codeRegionCarte') {
@@ -74,6 +102,16 @@ export class TableauResultatMuseeComponent implements OnInit {
 
       }
 
+      if (propName === 'codeTheme') {
+        let idTheme = changes[propName].currentValue;
+
+        console.log(idTheme);
+
+        if (idTheme !== '-1') {
+          this.getMuseesByThemes(idTheme);
+        }
+
+      }
 
     }
   }
@@ -101,6 +139,13 @@ export class TableauResultatMuseeComponent implements OnInit {
       this.setMusees(musees);
     })
   }
+
+  getMuseesByThemes(codeTheme: number) {
+    this.museeService.getMuseesByTheme(codeTheme).subscribe((liste1) => {
+      this.listMusees = liste1.musees;
+      this.setMusees(this.listMusees);
+    })
+  }
   
   setMusees(lstMusee: Musee[]) {
     lstMusee.forEach(musee => {
@@ -117,5 +162,8 @@ export class TableauResultatMuseeComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  onClick(st: string) {
+    this.codeMusee.emit(st);
+  }
 
 }

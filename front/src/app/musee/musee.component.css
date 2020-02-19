@@ -11,17 +11,24 @@
   border-radius: 5px;
   display: flex;
   min-width: 375px;
-  padding : 20px;
+  padding : 10px;
   flex-flow: wrap;
 }
 
 .blocGauche{
-  flex:1;
+  flex:0.8;
   align-self: center;
+  text-align: -webkit-center;
 }
 
 .blocDroite {
-  flex:2;
+  flex:1.5;
   display: flex;
   flex-direction: column;
+  align-self: center;
+}
+
+.blocMusee {
+  flex:1;
+  align-self: center;
 }

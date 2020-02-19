@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MuseeService} from '../musee.service';
-import {Musee} from '../models/musee';
 
 @Component({
   selector: 'app-musee',
@@ -9,22 +8,16 @@ import {Musee} from '../models/musee';
 })
 export class MuseeComponent implements OnInit {
 
-  musee = Musee;
-  idMusee = 'M0002';
+  codeMusee: String;
 
   constructor(private museeService: MuseeService) {
   }
 
   ngOnInit() {
-    this.recupeMusee()
-
   }
 
-  recupeMusee(): void {
-    this.museeService.getMuseeById('idMusee')
-      .subscribe((musee)=>{
-        this.musee=musee;
-        console.log(musee);
-      });
+  onCodeMusee(st : String) {
+    this.codeMusee = st;
   }
+
 }

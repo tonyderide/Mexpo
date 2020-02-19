@@ -98,7 +98,6 @@ export class ListeDeroulanteEnCascadeComponent implements OnInit {
     })
   }
 
-
   getRegionByDepartement(codeDepartement: String) {
   }
 

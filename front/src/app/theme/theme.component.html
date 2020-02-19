@@ -7,17 +7,20 @@
     <section class="conteneurCentral">
         
         <div class="blocGauche">
-            <app-carte-region (codeRegionCarte)="onCodeRegionCarte($event)"></app-carte-region>
+            <app-liste-deroulante-themes (codeThemeSelectionne)="onCodecodeThemeSelectionne($event)"></app-liste-deroulante-themes>
+            <app-image-themes></app-image-themes>
         </div>
         
         <div class="blocDroite">
 
-            <app-liste-deroulante-en-cascade></app-liste-deroulante-en-cascade>
-
             <div class="mat-app-background basic-container">
-                <app-tableau-resultat-musee ></app-tableau-resultat-musee>
+                <app-tableau-resultat-musee [codeTheme]="codeTheme" (codeMusee)="onCodeMusee($event)"></app-tableau-resultat-musee>
             </div>
             
+        </div>
+
+        <div class="blocMusee">
+            <app-fiche-musee [codeMusee]="codeMusee"></app-fiche-musee>
         </div>
 
     </section>

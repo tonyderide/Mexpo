@@ -4,7 +4,9 @@ import {debounceTime, distinctUntilChanged, map, startWith, switchMap} from 'rxj
 import { Musee} from '../models/musee'
 import { MuseeService } from "../musee.service";
 import {FormControl} from "@angular/forms";
-
+import { Globals } from '../global';
+import { Router } from '@angular/router';
+import { OeuvreArtiste } from '../models/oeuvreartiste';
 
 @Component({
   selector: 'app-search-musee',
@@ -13,38 +15,119 @@ import {FormControl} from "@angular/forms";
 })
 
 export class SearchMuseeComponent implements OnInit {
-     listMusee$: Musee[];
-     private searchTerms = new Subject<string>();
-     myControl: FormControl = new FormControl();
-     //filteredOption : Observable<string[]>;
-     displayFn(subject){ return subject ? subject.nomMusee : undefined; }
 
-  constructor(private museeService: MuseeService) {
+  recherche : string = "";
+  listMusees: Musee[];
+  listOeuvres: OeuvreArtiste[];
+
+  constructor(private museeService: MuseeService, private globals: Globals, private router: Router) {
+    this.recherche = globals.recherche;
+    this.listMusees = globals.listeMuseeRecherche;
+    this.listOeuvres = globals.listeOeuvreRecherche;
   }
 
-  ngOnInit(): void{
-    this.recupeMuseeList();
-    // this.filteredOption = this.myControl.valueChanges.pipe(
-    //     startWith(''),
-    //     map(val => this.filter(val))
-    //   );
-    // console.log(this.filteredOption);
+  ngOnInit(): void{}
+
+  /**
+   * Récupérer la valeur écrite dans la barre de recherche
+   */
+  setValueRecherche() {
+    this.getOeuvresByRechercheOeuvre(this.recherche);
+    // this.getMuseesByRechercheMusee(this.recherche);
+    this.globals.recherche = this.recherche;
   }
-  // filter(val: string): string[]{
-  //   return this.listMusee$.map(musee => musee.nomMusee).filter(option =>
-  //   option.toLowerCase().includes(val.toLowerCase()));
-  // }
 
-  recupeMuseeList(): void {
-    this.museeService.getMuseesList()
-      .subscribe((musee$: any) => {
-        this.listMusee$ = musee$;
-        console.log(this.listMusee$);
-      });
-  };
+  /**
+   * Récupérer la liste des musées correspondant aux critères de la recherche par "Musées" à partir de l'API externe
+   * @param rechercheMusee 
+   */
+  getMuseesByRechercheMusee(rechercheMusee : string) {
+    this.museeService.getMuseeByRecherche(rechercheMusee).subscribe((musees: Musee[]) => {
+      this.listMusees = musees;
+      this.globals.listeMuseeRecherche = this.listMusees;
+      // Se déplacer dans le menu musée
+      this.router.navigate(['musees'])
+    })
+  }
 
+  getOeuvresByRechercheOeuvre(rechercheMusee: string) {
+     this.museeService.getOeuvreByRecherche(rechercheMusee).subscribe((oeuvres: OeuvreArtiste[]) => {
+       this.listOeuvres = oeuvres;
+       this.globals.listeOeuvreRecherche = this.listOeuvres;
+       this.router.navigate(['oeuvres']);
+     })
+  }
+
+
+
+  
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @Component({
+//   selector: 'app-search-musee',
+//   templateUrl: './search-musee.component.html',
+//   styleUrls: ['./search-musee.component.scss']
+// })
+
+// export class SearchMuseeComponent implements OnInit {
+//      listMusee$: Musee[];
+//      private searchTerms = new Subject<string>();
+//      myControl: FormControl = new FormControl();
+//      //filteredOption : Observable<string[]>;
+//      displayFn(subject){ return subject ? subject.nomMusee : undefined; }
+
+//   constructor(private museeService: MuseeService) {
+//   }
+
+//   ngOnInit(): void{
+//     this.recupeMuseeList();
+//     // this.filteredOption = this.myControl.valueChanges.pipe(
+//     //     startWith(''),
+//     //     map(val => this.filter(val))
+//     //   );
+//     // console.log(this.filteredOption);
+//   }
+//   // filter(val: string): string[]{
+//   //   return this.listMusee$.map(musee => musee.nomMusee).filter(option =>
+//   //   option.toLowerCase().includes(val.toLowerCase()));
+//   // }
+
+//   recupeMuseeList(): void {
+//     this.museeService.getMuseesList()
+//       .subscribe((musee$: any) => {
+//         this.listMusee$ = musee$;
+//         console.log(this.listMusee$);
+//       });
+//   };
+
+
+// }
+
+
+
+
+
+
 // ngOnInit(): void {
 //   // console.log(this.museeService.getMuseesList());
 

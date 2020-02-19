@@ -11,7 +11,8 @@ export class LocalisationComponent implements OnInit {
   codeRegionListeDeroulante : String = '-1';
   codeDepartementListeDeroulante : String = '-1';
   codeVilleListeDeroulante : String = '-1';
-
+  codeMusee: String;
+  
   constructor() { }
 
   ngOnInit() {
@@ -33,4 +34,7 @@ export class LocalisationComponent implements OnInit {
     this.codeVilleListeDeroulante = st;
   }
 
+  onCodeMusee(st : String) {
+    this.codeMusee = st;
+  }
 }

@@ -71,4 +71,19 @@ export class MuseeService {
     return this.http.get(this.baseUrl + "musees/" + idMusee);
   }
 
+  // Récupérer le JSON des musées recherché
+  getMuseeByRecherche(museeARechercher : String) : Observable<any> {
+    return this.http.get(this.baseUrl + "musees/rechercheMusee/" + museeARechercher);
+  }
+
+  // Récupérer le JSON des musées par thème
+  getMuseesByTheme(idTheme : number) : Observable<any> {
+    return this.http.get(this.baseUrl + "themes/" + idTheme + "/musees");
+  }
+
+  // Récupérer le JSON des oeuvres par recherche
+  getOeuvreByRecherche(oeuvreARechercher : String) : Observable<any> {
+    return this.http.get(this.baseUrl + "oeuvresartistes/" + oeuvreARechercher);
+  }
+
 }
