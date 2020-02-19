@@ -1,4 +1,5 @@
 export class User {
+
     idUser : number;
     nom :string ;
     prenom:string ;
@@ -8,7 +9,6 @@ export class User {
     ville: string ;
     mdp: string ;
    // admin: boolean;
-   // token: string;
 
   constructor() {
 

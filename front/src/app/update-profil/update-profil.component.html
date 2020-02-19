@@ -1,0 +1,35 @@
+<div class="container">
+
+  <form method="POST" (submit)="userModifie()">
+
+    <h1>{{auth.prenom}} {{auth.nom}}</h1>
+
+    <label>Nom</label>
+    <input type="text"  name="nom"  [(ngModel)]="majUser.nom"   required>
+
+    <label>Prenom</label>
+    <input type="text"  name="prenom" [(ngModel)]="majUser.prenom" required>
+
+    <label>E-mail</label>
+    <input type="text"  name="email" [(ngModel)]="majUser.mail" required>
+
+
+    <label>voie</label>
+    <input type="text"  name="voie" [(ngModel)]="majUser.voie" required>
+
+    <label>code postal</label>
+    <input type="text"  name="code_postal" [(ngModel)]="majUser.codePostal" required>
+
+    <label>ville</label>
+    <input type="text"  name="ville" [(ngModel)]="majUser.ville"  required>
+
+    <label>Mot de passe</label>
+    <input type="password"  name="password"  [(ngModel)]="majUser.mdp" required>
+
+
+    <button  type="submit" class="submit" value='MODIFIER'>MODIFIER</button>
+    <button id="delete" (click)="auth.deleteUser(auth.idUser)">SUPPRIMER MON COMPTE</button>
+    <a routerLink="/accueil" >cancel</a>
+
+  </form>
+</div>

@@ -71,7 +71,7 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseStatus (code = HttpStatus.OK)
     public User login(@RequestParam String mail,
-                                      @RequestParam String mdp) {
+                      @RequestParam String mdp) {
         User reponse = null;
         Optional<User> userMail = userRepository.findByMail(mail);
 
@@ -80,6 +80,19 @@ public class UserController {
             reponse = userMail.get() ;
         }
            return reponse;
+    }
+
+
+
+    /**
+     * Supprimme un utilisateur de la BDD, avec l'idUser
+     * @param idUser
+     */
+    @DeleteMapping("/delete/{idUser}")
+    @ResponseStatus (code = HttpStatus.OK)
+    public void delete(@PathVariable int idUser) {
+
+        userRepository.deleteById(idUser);
     }
 
 }

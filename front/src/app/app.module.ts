@@ -33,7 +33,7 @@ import {
   MatFormFieldModule } from "@angular/material";
 import {MatInputModule} from '@angular/material';
 import { MatAutocompleteModule } from "@angular/material/";
-import { FicheMuseeComponent } from './fiche-musee/fiche-musee.component';
+import { UpdateProfilComponent } from './update-profil/update-profil.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { FicheMuseeComponent } from './fiche-musee/fiche-musee.component';
     TableauResultatMuseeComponent,
     ImageMuseesComponent,
     ImageThemesComponent,
-    FicheMuseeComponent,
+    UpdateProfilComponent,
   ],
   imports: [
     BrowserModule,

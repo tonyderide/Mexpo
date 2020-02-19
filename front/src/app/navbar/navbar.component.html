@@ -14,10 +14,10 @@
 
       <li *ngIf="auth.isLoggedIn()" >
         <div class="dropdown">
-          <button  id="button" >{{nom}} {{prenom}}</button>
+          <button  id="button" >{{auth.nom}} {{auth.prenom}}</button>
             <div class="dropdown-content" >
               <a>favoris</a>
-              <a>modifier profil</a>
+              <a routerLink="update">modifier profil</a>
               <a (click)="auth.logout()"> déconnexion </a>
             </div>
        </div>

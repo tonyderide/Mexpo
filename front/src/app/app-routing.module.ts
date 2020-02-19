@@ -9,6 +9,8 @@ import {ThemeComponent} from "./theme/theme.component";
 import {OeuvreComponent} from "./oeuvre/oeuvre.component";
 import {ExpositionComponent} from "./exposition/exposition.component";
 import {AccueilComponent} from "./accueil/accueil.component";
+import {UpdateProfilComponent} from "./update-profil/update-profil.component";
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
@@ -21,7 +23,8 @@ const routes: Routes = [
   { path: 'themes', component: ThemeComponent},
   { path: 'themes/:idTheme', component: ThemeComponent},
   { path: 'oeuvres', component: OeuvreComponent},
-  { path: 'expositions', component: ExpositionComponent}
+  { path: 'expositions', component: ExpositionComponent},
+  { path: 'update' , component: UpdateProfilComponent}
 ];
 
 @NgModule({
