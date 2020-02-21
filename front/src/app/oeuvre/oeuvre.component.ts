@@ -11,22 +11,25 @@ export class OeuvreComponent implements OnInit {
   oeuvre: string;
   listOeuvreByName: [] = [];
 
-
-
   constructor(private router:ActivatedRoute, private museeService: MuseeService) { }
 
   ngOnInit() {
-  this.recupeOeuvre();
-  console.log(this.recupeOeuvre());
-  console.log(this.getOeuvreByRecherche(this.recupeOeuvre()));
+    this.recupeOeuvre();
+    
+    if (this.oeuvre) {
+      this.getOeuvreByRecherche(this.oeuvre);
+      console.log(this.oeuvre);
+      console.log(this.listOeuvreByName);
+    }
+
   }
 
-  recupeOeuvre() { this.oeuvre = this.router.snapshot.paramMap.get('rechercheNomOeuvre'); }
+  recupeOeuvre() { 
+    this.oeuvre = this.router.snapshot.paramMap.get('rechercheNomOeuvre'); 
+  }
 
   getOeuvreByRecherche(rechercheNomOeuvre) {
     this.museeService.getOeuvreByRecherche(rechercheNomOeuvre).subscribe( (temp) => this.listOeuvreByName = temp);
   }
-
-
 
 }

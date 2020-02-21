@@ -16,15 +16,6 @@ export class ThemeComponent implements OnInit {
   codeTheme: number = -1;
 
   ngOnInit() {
-    this.recupeTheme();
-  }
-
-  recupeTheme(): void {
-    this.museeService.getMuseesByTheme(this.idTheme)
-      .subscribe((theme) => {
-        this.theme = theme;
-        console.log(this.theme);
-      });
   }
 
   onCodeMusee(st : string) {
